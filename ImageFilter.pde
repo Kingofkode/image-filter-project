@@ -10,7 +10,7 @@
 // 3.25  possible fix for the double-click bug
 // 3.5  double-click bug squashed  [Shout out to Mr. Purdy for the squashing!]
 
-boolean PicLoaded = true;
+boolean PicLoaded = false;
 boolean Grayscale = false;
 boolean Effect1 = false;
 boolean Effect2 = false;
