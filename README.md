@@ -7,7 +7,6 @@ Tools
 - Shapes
 
 Advanced UI
-- Undo/Redo
 - Dropdown menu
 - Undo/Redo
 - Open Image
