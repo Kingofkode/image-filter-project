@@ -3,8 +3,7 @@ int EDGES = 1;
 int NOISE = 2;
 
 // Mosaic Filter by Luke Estes
-PImage applyMosaicFilter(PImage img) {
-  int resolution = 10;
+PImage applyMosaicFilter(PImage img, int resolution) {
   color[] temp = new color[resolution*resolution];
   
   int xScale = img.width / resolution;
@@ -88,7 +87,18 @@ PImage applyEdgesFilter(PImage img) {
   img.updatePixels();
   return img;
 }
-
+// Noise filter by Trent Pannkuk
 PImage applyNoiseFilter(PImage img) {
+  img.loadPixels();
+  color white = color(255);
+    for (int i = 0; i < img.pixels.length; i++) {
+        float r = random(0,2);
+        int t = round(r);
+        if (t == 0) {
+          img.pixels[i] = white;
+        }
+    } 
+    
+  img.updatePixels();
   return img;
 }

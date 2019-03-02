@@ -14,7 +14,7 @@ class ImageView extends View {
   
   void applyFilter(int filter) {
     if (filter == MOSAIC) {
-      photo = applyMosaicFilter(photo);
+      photo = applyMosaicFilter(photo, 25);
     }
     if (filter == EDGES) {
       photo = applyEdgesFilter(photo);
