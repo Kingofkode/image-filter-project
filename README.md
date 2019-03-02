@@ -19,15 +19,18 @@ Because view objects are the main way the application interacts with the user, t
 Views can be nested inside other views to create view hierarchies, which offer a convenient way to organize related content. Nesting a view creates a parent-child relationship between the child view being nested and the parent. A parent view may contain any number of child views but each child view has only one parent view. When a child view’s visible area extends outside of the bounds of its parent view, no clipping of the child view's content occurs. The geometry of each view is defined by its `xPos`, `yPos`, `viewWidth`, and `viewHeight` properties. 
 
 #### Creating a view
-The following example creates a 600 x 400 view and places its top-left corner at the point (0, 0) in the parent view's coordinate system (once it is added to that parent view).
+The following example creates a 200 x 200 blue view and places its top-left corner at the point (10, 10) in the parent view's coordinate system (once it is added to that parent view).
 ```
-View mainView = new View(0,0,600,400);
+View blueView = new View(10, 10, 200, 200);
+// Sets background color to blue
+blueView.viewColor = color(133, 205, 246);
+// Adds blueView to mainView so it is rendered
+mainView.addChildView(blueView);
 
 ```
+![Image of Yaktocat](https://raw.githubusercontent.com/Kingofkode/image-filter-project/master/Screen%20Shot%202019-03-01%20at%208.37.39%20PM.png)
+The color was changed to blue in this example. The full list of a View's customizable properties can be found [here](View.md)
 
-To add a child view to another view, call the `addChildView(_:)` method on the parent view. Each call to the `addChildView(_:)` method places the new view on top of all other siblings.
-
-See the full list of View's customizable properties [here](View.md)
 
 
 
