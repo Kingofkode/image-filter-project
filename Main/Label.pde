@@ -4,6 +4,7 @@ class Label extends View {
   int alignment = LEFT;
   float textHeight;
   float textWidth;
+  boolean hasRendered = false;
   Label(String startTitle, float startXPos, float startYPos) {
     super(startXPos, startYPos);
     title = startTitle;
@@ -12,7 +13,9 @@ class Label extends View {
   void render() {
     super.render();
     // Adjusted font size to accommodate all resolutions.
-    fontSize *= width/1000;
+    if (!hasRendered) {
+      fontSize *= width/1000;
+    }
     fill(viewColor);
     textAlign(alignment);
     PFont f = createFont("Arial",fontSize,true);
@@ -20,6 +23,6 @@ class Label extends View {
     textHeight = textAscent() + textDescent();
     textWidth = textWidth(title);
     text(title, getSuperXPos(),getSuperYPos());
-    
+    hasRendered = true;
   }
 }
