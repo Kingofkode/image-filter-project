@@ -1,6 +1,7 @@
 //Model
 ArrayList<PImage> images = new ArrayList<PImage>();
 int currentImageIndex = 0;
+boolean brushEnabled = false;
 // UI Components
 final View mainView = new View(0,0,0,0);
 final View canvas = new View(0,0,0,0);
@@ -12,6 +13,8 @@ Button mosaicButton, edgesButton, noiseButton;
 Button undoButton, redoButton;
 // Save button
 Button saveButton;
+// Brush button
+Button brushButton;
 
 void setup () {
   fullScreen();
@@ -21,6 +24,7 @@ void setup () {
   setupFilterButtons();
   setupUndoRedoButtons();
   setupSaveButton();
+  setupBrushButton();
 }
 
 void setupMainView() {
@@ -183,4 +187,17 @@ void saveFile(File output) {
   if (output != null) {
     imageView.photo.save(output.getAbsolutePath());
   }
+}
+
+void setupBrushButton() {
+  brushButton = new Button("Brush", 0, mosaicButton.viewHeight*4, mainView.viewWidth/20, mainView.viewHeight/16);
+  brushButton.responder = new MouseResponder() {
+    public void isClicked() {
+      brushButton.isStuck = !brushButton.isStuck;
+      brushEnabled = brushButton.isStuck;
+    }
+    public void isHovering() {}
+    public void buttonDown(Mouse button) {}
+  };
+  mainView.addChildView(brushButton);
 }
