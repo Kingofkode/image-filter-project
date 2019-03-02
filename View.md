@@ -1,5 +1,5 @@
 # View Attributes
-#### Configuring a View's geometry
+## Configuring a View's geometry
 `float xPos;`
 
 The view's x-position within its parent's coordinate system.
@@ -16,7 +16,7 @@ The view's width.
 
 The view's height.
 
-#### Configuring a View’s Visual Appearance
+## Configuring a View’s Visual Appearance
 `color viewColor = color(255);`
 
 The view’s background color.
@@ -32,7 +32,7 @@ The view’s border thickness.
 `float cornderRadius = 0;`
 
 How rounded the view's corners are. Defaults to 0 (no rounding).
-#### Managing the View Hierarchy
+## Managing the View Hierarchy
 `void addChildView(View)`
 
 Adds a view to the end of the parent’s list of child views.
