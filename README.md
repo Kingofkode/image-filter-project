@@ -50,9 +50,14 @@ The following example modifies the view width when the view is clicked on.
 ### Buttons
 A button inherits all of the properties of a view with some added functionality. For example, when you hover over it, the button highlights. The following example creates a 100 x 50 button with the title "Import" and places its top-left corner at the point (10, 10) in the parent view's coordinate system.
 ```
-  final Button myButton = new Button("Import", 10, 10, 100, 50);
-  myButton.highlightedViewColor = color(35, 130, 242);
-  mainView.addChildView(myButton);
+// Initializes new button object
+final Button myButton = new Button("Import", 10, 10, 100, 50);
+
+// Changes the highlight color to blue
+myButton.highlightedViewColor = color(35, 130, 242);
+
+// Adds it to mainView so it is rendered
+mainView.addChildView(myButton);
 ```
 ![](https://raw.githubusercontent.com/Kingofkode/image-filter-project/master/Screenshots/Button%20Highlight%20v2.gif)
 
