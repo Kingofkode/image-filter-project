@@ -21,7 +21,7 @@ Views can be nested inside other views to create view hierarchies, which offer a
 #### Creating a view
 The following example creates a 200 x 200 blue view and places its top-left corner at the point (10, 10) in the parent view's coordinate system (once it is added to that parent view). The color was changed to blue in this example. The full list of View's customizable properties can be found [here](View.md).
 ```
-// Initializes new view object
+// Initializes new View object
 final View blueView = new View(10, 10, 200, 200);
 
 // Sets background color to blue
@@ -50,7 +50,7 @@ The following example modifies the view width when the view is clicked on.
 ### Buttons
 A button inherits all of the properties of a view with some added functionality. For example, when you hover over it, the button highlights. The following example creates a 100 x 50 button with the title "Import" and places its top-left corner at the point (10, 10) in the parent view's coordinate system. The `highlightedViewColor` was changed to blue in this example. A full list of Button's customizable attributes can be found [here](Button.md).
 ```
-// Initializes new button object
+// Initializes new Button object
 final Button myButton = new Button("Import", 10, 10, 100, 50);
 
 // Changes the highlight color to blue
@@ -60,7 +60,16 @@ myButton.highlightedViewColor = color(35, 130, 242);
 mainView.addChildView(myButton);
 ```
 ![](https://raw.githubusercontent.com/Kingofkode/image-filter-project/master/Screenshots/Button%20Highlight%20v2.gif)
+### Image View
+Image views let you efficiently draw any image that can be specified using a `ImageView` object. For example, you can use the `ImageView` class to display the contents of many standard image files, such as JPEG and PNG files. The following example displays an image of San Francisco loaded from the web.
+```
+// Initializes new ImageView object
+final ImageView myImageView = new ImageView("https://upload.wikimedia.org/wikipedia/commons/5/5c/San_Francisco%2C_California._June_2017_cropped.jpg", 10, 10, 421, 258);
 
+// Adds it to mainView so it is rendered
+mainView.addChildView(myImageView);
+```
+![]()
 
 
 
