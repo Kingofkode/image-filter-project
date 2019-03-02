@@ -34,11 +34,11 @@ The view's x-position within its parent's coordinate system.
 
 The view's y-position within its parent's coordinate system.
 
-`float width;`
+`float viewWidth;`
 
 The view's width.
 
-`float height`
+`float viewHeight`
 
 The view's height.
 
