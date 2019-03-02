@@ -26,7 +26,7 @@ View mainView = new View(0,0,600,400);
 ```
 To add a child view to another view, call the `addChildView(_:)` method on the parent view. Each call to the `addChildView(_:)` method places the new view on top of all other siblings.
 
-
+See the full list of customizable properties [here](View.md)
 
 
 
