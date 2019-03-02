@@ -8,7 +8,6 @@ class Button extends View {
     super(startXPos, startYPos, startViewWidth, startViewHeight);
     title = startTitle;
     titleLabel = new Label(title, 0, 0);
-    println(titleLabel.textHeight);
     titleLabel.viewColor = 0;
     addChildView(titleLabel);
     borderWidth = 1;

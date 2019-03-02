@@ -10,6 +10,8 @@ final Button importButton = new Button("Import", 0, 0, 100, 50);
 Button mosaicButton, edgesButton, noiseButton;
 // Undo Redo Buttons
 Button undoButton, redoButton;
+// Save button
+Button saveButton;
 void setup () {
   fullScreen();
   setupMainView();
@@ -17,6 +19,7 @@ void setup () {
   setupImportButton();
   setupFilterButtons();
   setupUndoRedoButtons();
+  setupSaveButton();
 }
 
 void setupMainView() {
@@ -146,7 +149,6 @@ void setupUndoRedoButtons() {
   redoButton.responder = new MouseResponder() {
     public void isClicked() {
       if (currentImageIndex < images.size()-1) {
-        println(currentImageIndex);
         imageView.photo = images.get(currentImageIndex+1);
         currentImageIndex++;
       }
@@ -155,4 +157,24 @@ void setupUndoRedoButtons() {
     public void buttonDown(Mouse button) {}
   };
   mainView.addChildView(redoButton);
+}
+
+void setupSaveButton() {
+  saveButton = new Button("Save", width-mainView.viewWidth/20, undoButton.viewHeight*2, mainView.viewWidth/20, mainView.viewHeight/16);
+  saveButton.responder = new MouseResponder() {
+    public void isClicked() {
+      if (imageView.photo != null) {
+        selectOutput("Save file", "saveFile");
+      }
+    }
+    public void isHovering() {}
+    public void buttonDown(Mouse button) {}
+  };
+  mainView.addChildView(saveButton);
+}
+
+void saveFile(File output) {
+  if (output != null) {
+    imageView.photo.save(output.getAbsolutePath());
+  }
 }
