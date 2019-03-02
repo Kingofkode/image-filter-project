@@ -32,9 +32,18 @@ mainView.addChildView(blueView);
 
 ```
 ![Image of Yaktocat](https://raw.githubusercontent.com/Kingofkode/image-filter-project/master/Screenshots/Screen%20Shot%202019-03-01%20at%208.49.43%20PM.png)
-
-
-
+```
+ blueView.responder = new MouseResponder() {
+    public void isClicked() {
+    // Increases view width to 400 when it is clicked on
+      blueView.viewWidth = 400;
+    }
+    
+    // All 3 methods must be present even if they are not used
+    public void isHovering() {}
+    public void buttonDown(Mouse button) {}
+  };
+```
 
 
 
