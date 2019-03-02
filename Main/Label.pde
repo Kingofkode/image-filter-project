@@ -11,11 +11,13 @@ class Label extends View {
   
   void render() {
     super.render();
+    // Adjusted font size to accommodate all resolutions.
+    fontSize *= width/1000;
     fill(viewColor);
     textAlign(alignment);
     PFont f = createFont("Arial",fontSize,true);
+    println(width);
     textFont(f,fontSize);
-    // FUCK this one. IT DOESNT WORK EVER
     textHeight = textAscent() + textDescent();
     textWidth = textWidth(title);
     text(title, getSuperXPos(),getSuperYPos());

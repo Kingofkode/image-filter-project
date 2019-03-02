@@ -1,16 +1,16 @@
-// Model
-
-//
+// UI Components
 final View mainView = new View(0,0,0,0);
 final View canvas = new View(0,0,0,0);
 ImageView imageView;
 final Button importButton = new Button("Import", 0, 0, 100, 50);
-
+// Filter Buttons
+Button mosaicButton;
 void setup () {
   fullScreen();
   setupMainView();
   setupCanvas();
   setupImportButton();
+  setupFilterButtons();
 }
 
 void setupMainView() {
@@ -32,8 +32,6 @@ void setupImportButton() {
   // Adjust dimensions to accommodate all resolutions
   importButton.viewWidth = canvas.viewWidth/16;
   importButton.viewHeight = canvas.viewHeight/16;
-  // Adjust font to accommodate all resolutions
-  importButton.titleLabel.fontSize = importButton.titleLabel.fontSize * width/1000;
   importButton.xPos = canvas.viewWidth/2-importButton.viewWidth/2;
   importButton.yPos = canvas.viewHeight/2-importButton.viewHeight/2;
   
@@ -74,4 +72,8 @@ void imageSelected(File input) {
     canvas.addChildView(imageView);
     importButton.removeFromParentView();
   }
+}
+
+void setupFilterButtons() {
+  //mosaicButton = new Button();
 }
