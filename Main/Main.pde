@@ -50,7 +50,7 @@ void imageSelected(File input) {
     PImage image = loadImage(input.getAbsolutePath());
     imageView = new ImageView(input.getAbsolutePath(), 0, 0, 0, 0);
     
-    // Dimension math
+    // Resize if necessary
     float shrinkRatio;
     if (image.width > canvas.viewWidth) {
       shrinkRatio = canvas.viewWidth/image.width;
@@ -60,9 +60,11 @@ void imageSelected(File input) {
       shrinkRatio = canvas.viewHeight/image.height;
       image.resize((int)(shrinkRatio * image.width), (int)(shrinkRatio * image.height));
     }
-    
     imageView.viewWidth = image.width;
     imageView.viewHeight = image.height;
+    // Center in canvas
+    imageView.xPos = (canvas.viewWidth-imageView.viewWidth)/2;
+    imageView.yPos = (canvas.viewHeight-imageView.viewHeight)/2;
     canvas.addChildView(imageView);
     importButton.removeFromParentView();
   }
