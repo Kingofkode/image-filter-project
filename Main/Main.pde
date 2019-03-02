@@ -5,18 +5,19 @@ int currentImageIndex = 0;
 final View mainView = new View(0,0,0,0);
 final View canvas = new View(0,0,0,0);
 ImageView imageView;
-final Button importButton = new Button("Import", 0, 0, 100, 50);
+final Button openButton = new Button("Open", 0, 0, 100, 50);
 // Filter Buttons
 Button mosaicButton, edgesButton, noiseButton;
 // Undo Redo Buttons
 Button undoButton, redoButton;
 // Save button
 Button saveButton;
+
 void setup () {
   fullScreen();
   setupMainView();
   setupCanvas();
-  setupImportButton();
+  setupOpenButton();
   setupFilterButtons();
   setupUndoRedoButtons();
   setupSaveButton();
@@ -37,23 +38,23 @@ void setupCanvas() {
   mainView.addChildView(canvas);
 }
 
-void setupImportButton() {
+void setupOpenButton() {
   // Adjust dimensions to accommodate all resolutions
-  importButton.viewWidth = canvas.viewWidth/16;
-  importButton.viewHeight = canvas.viewHeight/16;
+  openButton.viewWidth = canvas.viewWidth/16;
+  openButton.viewHeight = canvas.viewHeight/16;
   
-  importButton.xPos = canvas.viewWidth/2-importButton.viewWidth/2;
-  importButton.yPos = canvas.viewHeight/2-importButton.viewHeight/2;
+  openButton.xPos = canvas.viewWidth/2-openButton.viewWidth/2;
+  openButton.yPos = canvas.viewHeight/2-openButton.viewHeight/2;
   
  
-  importButton.responder = new MouseResponder() {
+  openButton.responder = new MouseResponder() {
     public void isClicked() {
       selectInput("Choose Image", "imageSelected");
     }
     public void isHovering() {}
     public void buttonDown(Mouse button) {}
   };
-  canvas.addChildView(importButton);
+  canvas.addChildView(openButton);
 }
 
 void imageSelected(File input) {
@@ -62,6 +63,9 @@ void imageSelected(File input) {
     // Display error message
   } else {
     PImage image = loadImage(input.getAbsolutePath());
+    if (imageView != null) {
+      imageView.removeFromParentView();
+    }
     imageView = new ImageView(input.getAbsolutePath(), 0, 0, 0, 0);
     
     // Resize if necessary
@@ -80,7 +84,12 @@ void imageSelected(File input) {
     imageView.xPos = (canvas.viewWidth-imageView.viewWidth)/2;
     imageView.yPos = (canvas.viewHeight-imageView.viewHeight)/2;
     canvas.addChildView(imageView);
-    importButton.removeFromParentView();
+    openButton.removeFromParentView();
+    openButton.xPos = width-mainView.viewWidth/20;
+    openButton.yPos = undoButton.viewHeight*3;
+    openButton.viewWidth = mainView.viewWidth/20;
+    openButton.viewHeight = mainView.viewHeight/16;
+    mainView.addChildView(openButton);
   }
 }
 
@@ -89,9 +98,6 @@ void setupFilterButtons() {
   mosaicButton = new Button("Mosaic", 0, 0, mainView.viewWidth/20, mainView.viewHeight/16);
   mosaicButton.responder = new MouseResponder() {
     public void isClicked() {
-      images.subList(currentImageIndex, images.size()).clear();
-      images.add(imageView.photo.copy());
-      currentImageIndex++;
       imageView.applyFilter(MOSAIC);
       
     }
