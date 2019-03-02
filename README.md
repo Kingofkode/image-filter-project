@@ -31,7 +31,7 @@ blueView.viewColor = color(133, 205, 246);
 mainView.addChildView(blueView);
 
 ```
-![Image of Yaktocat](https://raw.githubusercontent.com/Kingofkode/image-filter-project/master/Screenshots/Screen%20Shot%202019-03-01%20at%208.49.43%20PM.png)
+![](https://raw.githubusercontent.com/Kingofkode/image-filter-project/master/Screenshots/Screen%20Shot%202019-03-01%20at%208.49.43%20PM.png)
 ```
  blueView.responder = new MouseResponder() {
     public void isClicked() {
@@ -44,7 +44,7 @@ mainView.addChildView(blueView);
     public void buttonDown(Mouse button) {}
   };
 ```
-
+![https://raw.githubusercontent.com/Kingofkode/image-filter-project/master/Screenshots/Click.gif]
 
 
 
