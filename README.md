@@ -72,7 +72,11 @@ mainView.addChildView(myImageView);
 ![](https://raw.githubusercontent.com/Kingofkode/image-filter-project/master/Screenshots/Screen%20Shot%202019-03-02%20at%207.41.14%20AM.png)
 The picture presented in the `ImageView` can be changed by accessing its `photoPath` property. The `photoPath` property is a string that represents either an online URL to an image or the name of a locally stored image.
 #### Applying filters to ImageView
+The following example applies a mosaic filter to the aforementioned ImageView.
 
+`myImageView.applyFilter(MOSAIC);`
+
+![]()
 
 
 
