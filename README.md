@@ -2,8 +2,7 @@
 
 ## Installation
 1. Download the master branch
-2. Ensure downloaded folder is named "Main"
-3. Open Main.pde
+2. Open image-filter-project-master/Main/Main.pde
 ## Getting started with the UI Library
 ### Views
 Views are the fundamental building blocks the user interface.
@@ -76,7 +75,7 @@ The following example applies a mosaic filter to the aforementioned ImageView.
 
 `myImageView.applyFilter(MOSAIC);`
 
-![]()
+![](https://raw.githubusercontent.com/Kingofkode/image-filter-project/master/Screenshots/Mosaic.png)
 
 
 
