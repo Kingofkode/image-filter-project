@@ -21,7 +21,7 @@ Views can be nested inside other views to create view hierarchies, which offer a
 #### Creating a view
 The following example creates a 200 x 200 blue view and places its top-left corner at the point (10, 10) in the parent view's coordinate system (once it is added to that parent view).
 ```
-// Initializes new view object.
+// Initializes new view object
 View blueView = new View(10, 10, 200, 200);
 
 // Sets background color to blue
