@@ -1,7 +1,7 @@
 # Image Filter Project
 
 ## Installation
-1. Download
+1. Download the master branch
 2. Ensure downloaded folder is named "Main"
 3. Open Main.pde
 ## Getting started with the UI Library
