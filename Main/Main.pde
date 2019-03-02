@@ -1,3 +1,6 @@
+//Model
+ArrayList<PImage> images = new ArrayList<PImage>();
+int currentImageIndex = 0;
 // UI Components
 final View mainView = new View(0,0,0,0);
 final View canvas = new View(0,0,0,0);
@@ -5,12 +8,15 @@ ImageView imageView;
 final Button importButton = new Button("Import", 0, 0, 100, 50);
 // Filter Buttons
 Button mosaicButton, edgesButton, noiseButton;
+// Undo Redo Buttons
+Button undoButton, redoButton;
 void setup () {
   fullScreen();
   setupMainView();
   setupCanvas();
   setupImportButton();
   setupFilterButtons();
+  setupUndoRedoButtons();
 }
 
 void setupMainView() {
@@ -80,7 +86,11 @@ void setupFilterButtons() {
   mosaicButton = new Button("Mosaic", 0, 0, mainView.viewWidth/20, mainView.viewHeight/16);
   mosaicButton.responder = new MouseResponder() {
     public void isClicked() {
+      images.subList(currentImageIndex, images.size()).clear();
+      images.add(imageView.photo.copy());
+      currentImageIndex++;
       imageView.applyFilter(MOSAIC);
+      
     }
     public void isHovering() {}
     public void buttonDown(Mouse button) {}
@@ -90,6 +100,9 @@ void setupFilterButtons() {
   edgesButton = new Button("Edges", 0, mosaicButton.viewHeight, mainView.viewWidth/20, mainView.viewHeight/16);
   edgesButton.responder = new MouseResponder() {
     public void isClicked() {
+      images.subList(currentImageIndex, images.size()).clear();
+      images.add(imageView.photo.copy());
+      currentImageIndex++;
       imageView.applyFilter(EDGES);
     }
     public void isHovering() {}
@@ -101,10 +114,27 @@ void setupFilterButtons() {
   noiseButton = new Button("Noise", 0, mosaicButton.viewHeight*2, mainView.viewWidth/20, mainView.viewHeight/16);
   noiseButton.responder = new MouseResponder() {
     public void isClicked() {
+      images.subList(currentImageIndex, images.size()).clear();
+      images.add(imageView.photo.copy());
+      currentImageIndex++;
       imageView.applyFilter(NOISE);
     }
     public void isHovering() {}
     public void buttonDown(Mouse button) {}
   };
   mainView.addChildView(noiseButton);
+}
+void setupUndoRedoButtons() {
+  undoButton = new Button("Undo", width-mainView.viewWidth/20, 0, mainView.viewWidth/20, mainView.viewHeight/16);
+  undoButton.responder = new MouseResponder() {
+    public void isClicked() {
+      if (currentImageIndex > 0) {
+        imageView.photo = images.get(currentImageIndex-1);
+        currentImageIndex--;
+      }
+    }
+    public void isHovering() {}
+    public void buttonDown(Mouse button) {}
+  };
+  mainView.addChildView(undoButton);
 }
