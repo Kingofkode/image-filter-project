@@ -32,6 +32,8 @@ mainView.addChildView(blueView);
 
 ```
 ![](https://raw.githubusercontent.com/Kingofkode/image-filter-project/master/Screenshots/Screen%20Shot%202019-03-01%20at%208.49.43%20PM.png)
+### Mouse event handling
+The following example modifies the view width when the view is clicked on.
 ```
  blueView.responder = new MouseResponder() {
     public void isClicked() {
