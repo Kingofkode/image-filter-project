@@ -1,4 +1,5 @@
 # Filters
+Call `applyFilter(:_)` on `ImageView` and pass in one of these constants.
 
 | Filter          | Result           |
 | ------------- |:-------------:|
