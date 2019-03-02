@@ -3,7 +3,7 @@
 ## Installation
 1. Download the master branch
 2. Open image-filter-project-master/Main/Main.pde
-## Getting started with the UI Library
+## Getting Started with the UI Library
 ### Views
 Views are the fundamental building blocks the user interface.
 Because view objects are the main way the application interacts with the user, they have a number of responsibilities. Here are just a few:
