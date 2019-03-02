@@ -29,9 +29,13 @@ void setupCanvas() {
 }
 
 void setupImportButton() {
+  // Adjust dimensions to accomodate all resolutions
+  importButton.viewWidth = canvas.viewWidth/16;
+  importButton.viewHeight = canvas.viewHeight/16;
   importButton.xPos = canvas.viewWidth/2-importButton.viewWidth/2;
   importButton.yPos = canvas.viewHeight/2-importButton.viewHeight/2;
   
+ 
   importButton.responder = new MouseResponder() {
     public void isClicked() {
       selectInput("Choose Image", "imageSelected");
