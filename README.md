@@ -18,7 +18,7 @@ Because view objects are the main way the application interacts with the user, t
 Views can be nested inside other views to create view hierarchies, which offer a convenient way to organize related content. Nesting a view creates a parent-child relationship between the child view being nested and the parent. A parent view may contain any number of child views but each child view has only one parent view. When a child view’s visible area extends outside of the bounds of its parent view, no clipping of the child view's content occurs. The geometry of each view is defined by its `xPos`, `yPos`, `viewWidth`, and `viewHeight` properties. 
 
 #### Creating a view
-The following example creates a 200 x 200 blue view and places its top-left corner at the point (10, 10) in the parent view's coordinate system (once it is added to that parent view). The color was changed to blue in this example. The full list of View's customizable properties can be found [here](View.md).
+The following example creates a 200 x 200 blue view and places its top-left corner at the point (10, 10) in the parent view's coordinate system (once it is added to that parent view). The color was changed to blue in this example. The full list of View's customizable properties can be found [here](Docs/View.md).
 ```
 // Initializes new View object
 final View blueView = new View(10, 10, 200, 200);
@@ -47,7 +47,7 @@ The following example modifies the view width when the view is clicked on.
 ```
 ![](https://raw.githubusercontent.com/Kingofkode/image-filter-project/master/Screenshots/Click.gif)
 ### Button
-A button inherits all of the properties of a view with some added functionality. For example, when you hover over it, the button highlights. The following example creates a 100 x 50 button with the title "Import" and places its top-left corner at the point (10, 10) in the parent view's coordinate system. The `highlightedViewColor` was changed to blue in this example. A full list of Button's customizable attributes can be found [here](Button.md).
+A button inherits all of the properties of a view with some added functionality. For example, when you hover over it, the button highlights. The following example creates a 100 x 50 button with the title "Import" and places its top-left corner at the point (10, 10) in the parent view's coordinate system. The `highlightedViewColor` was changed to blue in this example. A full list of Button's customizable attributes can be found [here](Docs/Button.md).
 ```
 // Initializes new Button object
 final Button myButton = new Button("Import", 10, 10, 100, 50);
@@ -71,7 +71,7 @@ mainView.addChildView(myImageView);
 ![](https://raw.githubusercontent.com/Kingofkode/image-filter-project/master/Screenshots/Screen%20Shot%202019-03-02%20at%207.41.14%20AM.png)
 The picture presented in the `ImageView` can be changed by accessing its `photoPath` property. The `photoPath` property is a string that represents either an online URL to an image or the name of a locally stored image.
 #### Applying filters to ImageView
-The following example applies a mosaic filter to the aforementioned ImageView. A full list of available filters can be found [here](Filters.md).
+The following example applies a mosaic filter to the aforementioned ImageView. A full list of available filters can be found [here](Docs/Filters.md).
 
 `myImageView.applyFilter(MOSAIC);`
 
