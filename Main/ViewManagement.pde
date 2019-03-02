@@ -3,11 +3,11 @@
 // Must be called during mouseMoved() & mousePressed()
 void interactWithTopView(Mouse interaction) {
   View currentView = mainView;
-  View currentInteractableView = mainView.delegate == null ? null : mainView;
+  View currentInteractableView = mainView.responder == null ? null : mainView;
   // Searches for the frontmost view that contains the mouse and has a non-null delegate
   while (currentView.getTopChildViewThatContainsMouse() != null) {
     currentView = currentView.getTopChildViewThatContainsMouse();
-    if (currentView.delegate != null) currentInteractableView = currentView;
+    if (currentView.responder != null) currentInteractableView = currentView;
   }
   
   if (currentInteractableView != null) {

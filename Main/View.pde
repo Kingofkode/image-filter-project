@@ -11,7 +11,7 @@ class View {
   // Default color is white
   color viewColor = color(255);
   // For mouse interactions
-  MouseDelegate delegate;
+  MouseResponder responder;
   
   // For labels
   View(float startXPos, float startYPos) {
@@ -105,19 +105,19 @@ class View {
 
   // These methods can be overriden to perform UI related tasks such as highlighting when the mouse is hovering
   void click() {
-    delegate.isClicked();
+    responder.isClicked();
   }
   
   void hover() {
-    delegate.isHovering();
+    responder.isHovering();
   }
   
   void leftButtonDown() {
-    delegate.buttonDown(Mouse.LeftButton);
+    responder.buttonDown(Mouse.LeftButton);
   }
   
   void rightButtonDown() {
-    delegate.buttonDown(Mouse.RightButton);
+    responder.buttonDown(Mouse.RightButton);
   }
   
 }
