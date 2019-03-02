@@ -29,9 +29,11 @@ void setupCanvas() {
 }
 
 void setupImportButton() {
-  // Adjust dimensions to accomodate all resolutions
+  // Adjust dimensions to accommodate all resolutions
   importButton.viewWidth = canvas.viewWidth/16;
   importButton.viewHeight = canvas.viewHeight/16;
+  // Adjust font to accommodate all resolutions
+  importButton.titleLabel.fontSize = importButton.titleLabel.fontSize * width/1000;
   importButton.xPos = canvas.viewWidth/2-importButton.viewWidth/2;
   importButton.yPos = canvas.viewHeight/2-importButton.viewHeight/2;
   
