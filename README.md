@@ -44,7 +44,7 @@ mainView.addChildView(blueView);
     public void buttonDown(Mouse button) {}
   };
 ```
-![https://raw.githubusercontent.com/Kingofkode/image-filter-project/master/Screenshots/Click.gif]
+![](https://raw.githubusercontent.com/Kingofkode/image-filter-project/master/Screenshots/Click.gif)
 
 
 
