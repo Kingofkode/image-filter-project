@@ -9,7 +9,7 @@
 Views are the fundamental building blocks the user interface.
 Because view objects are the main way the application interacts with the user, they have a number of responsibilities. Here are just a few:
 - Views draw content in their rectangular area
-20PM.png
+
 - Layout and child view management
 
 - Views may contain zero or more child views.
@@ -21,10 +21,16 @@ Views can be nested inside other views to create view hierarchies, which offer a
 #### Creating a view
 The following example creates a 200 x 200 blue view and places its top-left corner at the point (10, 10) in the parent view's coordinate system (once it is added to that parent view).
 ```
+// Initializes new view object.
+
 View blueView = new View(10, 10, 200, 200);
+
 // Sets background color to blue
+
 blueView.viewColor = color(133, 205, 246);
+
 // Adds blueView to mainView so it is rendered
+
 mainView.addChildView(blueView);
 
 ```
