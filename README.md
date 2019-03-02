@@ -18,3 +18,8 @@ Filters
 - Edges
 - Fish Eye
 
+```
+git status
+git add
+git commit
+```
