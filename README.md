@@ -9,7 +9,7 @@
 Views are the fundamental building blocks the user interface.
 Because view objects are the main way the application interacts with the user, they have a number of responsibilities. Here are just a few:
 - Views draw content in their rectangular area
-
+20PM.png
 - Layout and child view management
 
 - Views may contain zero or more child views.
@@ -28,7 +28,7 @@ blueView.viewColor = color(133, 205, 246);
 mainView.addChildView(blueView);
 
 ```
-![Image of Yaktocat](https://raw.githubusercontent.com/Kingofkode/image-filter-project/master/Screen%20Shot%202019-03-01%20at%208.37.39%20PM.png)
+![Image of Yaktocat](https://raw.githubusercontent.com/Kingofkode/image-filter-project/master/Screenshots/Screen%20Shot%202019-03-01%20at%208.49.43%20PM.png)
 The color was changed to blue in this example. The full list of a View's customizable properties can be found [here](View.md)
 
 
