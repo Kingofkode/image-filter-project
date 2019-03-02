@@ -125,10 +125,14 @@ void setupFilterButtons() {
   mainView.addChildView(noiseButton);
 }
 void setupUndoRedoButtons() {
+  // Undo Button
   undoButton = new Button("Undo", width-mainView.viewWidth/20, 0, mainView.viewWidth/20, mainView.viewHeight/16);
   undoButton.responder = new MouseResponder() {
     public void isClicked() {
       if (currentImageIndex > 0) {
+        if (currentImageIndex == images.size()) {
+          images.add(imageView.photo.copy());
+        }
         imageView.photo = images.get(currentImageIndex-1);
         currentImageIndex--;
       }
@@ -137,4 +141,18 @@ void setupUndoRedoButtons() {
     public void buttonDown(Mouse button) {}
   };
   mainView.addChildView(undoButton);
+  // Redo Button
+  redoButton = new Button("Redo", width-mainView.viewWidth/20, undoButton.viewHeight, mainView.viewWidth/20, mainView.viewHeight/16);
+  redoButton.responder = new MouseResponder() {
+    public void isClicked() {
+      if (currentImageIndex < images.size()-1) {
+        println(currentImageIndex);
+        imageView.photo = images.get(currentImageIndex+1);
+        currentImageIndex++;
+      }
+    }
+    public void isHovering() {}
+    public void buttonDown(Mouse button) {}
+  };
+  mainView.addChildView(redoButton);
 }
