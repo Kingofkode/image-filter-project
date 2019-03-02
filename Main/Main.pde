@@ -4,7 +4,7 @@ final View canvas = new View(0,0,0,0);
 ImageView imageView;
 final Button importButton = new Button("Import", 0, 0, 100, 50);
 // Filter Buttons
-Button mosaicButton;
+Button mosaicButton, edgesButton, noiseButton;
 void setup () {
   fullScreen();
   setupMainView();
@@ -76,5 +76,35 @@ void imageSelected(File input) {
 }
 
 void setupFilterButtons() {
-  //mosaicButton = new Button();
+  // Mosaic Button
+  mosaicButton = new Button("Mosaic", 0, 0, mainView.viewWidth/20, mainView.viewHeight/16);
+  mosaicButton.responder = new MouseResponder() {
+    public void isClicked() {
+      imageView.applyFilter(MOSAIC);
+    }
+    public void isHovering() {}
+    public void buttonDown(Mouse button) {}
+  };
+  mainView.addChildView(mosaicButton);
+  // Edges Button
+  edgesButton = new Button("Edges", 0, mosaicButton.viewHeight, mainView.viewWidth/20, mainView.viewHeight/16);
+  edgesButton.responder = new MouseResponder() {
+    public void isClicked() {
+      imageView.applyFilter(EDGES);
+    }
+    public void isHovering() {}
+    public void buttonDown(Mouse button) {}
+  };
+  mainView.addChildView(edgesButton);
+  
+  // Noise Button
+  noiseButton = new Button("Noise", 0, mosaicButton.viewHeight*2, mainView.viewWidth/20, mainView.viewHeight/16);
+  noiseButton.responder = new MouseResponder() {
+    public void isClicked() {
+      imageView.applyFilter(NOISE);
+    }
+    public void isHovering() {}
+    public void buttonDown(Mouse button) {}
+  };
+  mainView.addChildView(noiseButton);
 }
