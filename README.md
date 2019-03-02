@@ -61,7 +61,7 @@ mainView.addChildView(myButton);
 ```
 ![](https://raw.githubusercontent.com/Kingofkode/image-filter-project/master/Screenshots/Button%20Highlight%20v2.gif)
 ### Image View
-Image views let you efficiently draw any image that can be specified using a `ImageView` object. For example, you can use the `ImageView` class to display the contents of many standard image files, such as JPEG and PNG files. The following example displays a 421 x 258 image of San Francisco loaded from the web and places its top-left corner at the point (10, 10) in the parent view's coordinate system.
+Image views let you efficiently draw any image that can be specified using a `ImageView` object. For example, you can use the `ImageView` class to display the contents of many standard image files, such as JPEG and PNG files. The following example displays a 421 x 258 image of San Francisco loaded from the web and places its top-left corner at the point (10, 10) in the parent view's coordinate system. The picture presented in the `ImageView` can be changed by accessing its `photoPath` property. The `photoPath` property is a string that represents either an online URL to an image or the name of a locally stored image.
 ```
 // Initializes new ImageView object
 final ImageView myImageView = new ImageView("https://upload.wikimedia.org/wikipedia/commons/5/5c/San_Francisco%2C_California._June_2017_cropped.jpg", 10, 10, 421, 258);
