@@ -16,7 +16,6 @@ class Label extends View {
     fill(viewColor);
     textAlign(alignment);
     PFont f = createFont("Arial",fontSize,true);
-    println(width);
     textFont(f,fontSize);
     textHeight = textAscent() + textDescent();
     textWidth = textWidth(title);
