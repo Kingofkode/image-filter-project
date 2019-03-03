@@ -94,6 +94,18 @@ void imageSelected(File input) {
     openButton.viewWidth = mainView.viewWidth/20;
     openButton.viewHeight = mainView.viewHeight/16;
     mainView.addChildView(openButton);
+    
+    imageView.responder = new MouseResponder() {
+      public void isClicked() {}
+      public void isHovering() {}
+      public void buttonDown(Mouse button) {
+        if (brushEnabled && mousePressed) {
+          imageView.photo.loadPixels();
+          imageView.photo.pixels[int(imageView.viewWidth)*(mouseY-int(imageView.yPos+canvas.yPos)-1) + mouseX-int(imageView.xPos+canvas.xPos)-1] = color(255);
+          imageView.photo.updatePixels();
+        }
+      }
+    };
   }
 }
 
