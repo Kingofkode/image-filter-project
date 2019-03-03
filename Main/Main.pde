@@ -66,10 +66,11 @@ void imageSelected(File input) {
     print("Error loading image.");
     // Display error message
   } else {
-    PImage image = loadImage(input.getAbsolutePath());
     if (imageView != null) {
       imageView.removeFromParentView();
     }
+    cursor(WAIT);
+    PImage image = loadImage(input.getAbsolutePath());
     imageView = new ImageView(input.getAbsolutePath(), 0, 0, 0, 0);
     
     // Resize if necessary
@@ -107,6 +108,7 @@ void imageSelected(File input) {
       }
     };
   }
+  cursor(ARROW);
 }
 
 void setupFilterButtons() {
@@ -207,6 +209,13 @@ void setupBrushButton() {
     public void isClicked() {
       brushButton.isStuck = !brushButton.isStuck;
       brushEnabled = brushButton.isStuck;
+      if (brushEnabled) {
+        PImage brushImage = loadImage("artistic-brush.png");
+        brushImage.resize(32, 32);
+        cursor(brushImage);
+      }else{
+        cursor(ARROW);
+      }
     }
     public void isHovering() {}
     public void buttonDown(Mouse button) {}
