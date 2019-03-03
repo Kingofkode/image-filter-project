@@ -66,10 +66,12 @@ void imageSelected(File input) {
     print("Error loading image.");
     // Display error message
   } else {
-    PImage image = loadImage(input.getAbsolutePath());
+    cursor(WAIT);
     if (imageView != null) {
       imageView.removeFromParentView();
     }
+    openButton.removeFromParentView();
+    PImage image = loadImage(input.getAbsolutePath());
     imageView = new ImageView(input.getAbsolutePath(), 0, 0, 0, 0);
     
     // Resize if necessary
@@ -88,12 +90,13 @@ void imageSelected(File input) {
     imageView.xPos = (canvas.viewWidth-imageView.viewWidth)/2;
     imageView.yPos = (canvas.viewHeight-imageView.viewHeight)/2;
     canvas.addChildView(imageView);
-    openButton.removeFromParentView();
+    
     openButton.xPos = width-mainView.viewWidth/20;
     openButton.yPos = undoButton.viewHeight*3;
     openButton.viewWidth = mainView.viewWidth/20;
     openButton.viewHeight = mainView.viewHeight/16;
     mainView.addChildView(openButton);
+    cursor(ARROW);
   }
 }
 
