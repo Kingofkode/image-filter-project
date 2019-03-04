@@ -15,6 +15,8 @@ Button undoButton, redoButton;
 Button saveButton;
 // Brush button
 Button brushButton;
+// Exit button
+Button exitButton;
 
 void setup () {
   fullScreen();
@@ -25,6 +27,7 @@ void setup () {
   setupUndoRedoButtons();
   setupSaveButton();
   setupBrushButton();
+  setupExitButton();
 }
 
 void setupMainView() {
@@ -221,4 +224,16 @@ void setupBrushButton() {
     public void buttonDown(Mouse button) {}
   };
   mainView.addChildView(brushButton);
+}
+
+void setupExitButton() {
+  exitButton = new Button("Exit", width-mainView.viewWidth/20, undoButton.viewHeight*4, mainView.viewWidth/20, mainView.viewHeight/16);
+  exitButton.responder = new MouseResponder() {
+    public void isClicked() {
+      exit();
+    }
+    public void isHovering() {}
+    public void buttonDown(Mouse button) {}
+  };
+  mainView.addChildView(exitButton);
 }
