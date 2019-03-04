@@ -2,6 +2,9 @@
 ArrayList<PImage> images = new ArrayList<PImage>();
 int currentImageIndex = 0;
 boolean brushEnabled = false;
+boolean squareEnabled = false;
+boolean squareStarted = false;
+int xStart, yStart;
 float shrinkRatio1, shrinkRatio2;
 // UI Components
 final View mainView = new View(0,0,0,0);
@@ -14,8 +17,8 @@ Button mosaicButton, edgesButton, noiseButton;
 Button undoButton, redoButton;
 // Save button
 Button saveButton;
-// Brush button
-Button brushButton;
+// Brush and square buttons
+Button brushButton, squareButton;
 // Exit button
 Button exitButton;
 
@@ -28,6 +31,7 @@ void setup () {
   setupUndoRedoButtons();
   setupSaveButton();
   setupBrushButton();
+  setupSquareButton();
   setupExitButton();
 }
 
@@ -110,6 +114,39 @@ void imageSelected(File input) {
           images.subList(currentImageIndex, images.size()).clear();
           images.add(imageView.photo.copy());
           currentImageIndex++;
+        }
+        if (squareEnabled) {
+          if (!squareStarted) {
+            xStart = mouseX;
+            yStart = mouseY;
+            squareStarted = !squareStarted;
+          } else {
+            imageView.photo.loadPixels();
+            int xLarger, yLarger, xSmaller, ySmaller;
+            if (mouseX > xStart) {
+              xLarger = int((mouseX - canvas.xPos - imageView.xPos)/(shrinkRatio1*shrinkRatio2));
+              xSmaller = int((xStart - canvas.xPos - imageView.xPos)/(shrinkRatio1*shrinkRatio2));
+            } else {
+              xLarger = int((xStart - canvas.xPos - imageView.xPos)/(shrinkRatio1*shrinkRatio2));
+              xSmaller = int((mouseX - canvas.xPos - imageView.xPos)/(shrinkRatio1*shrinkRatio2));
+            }
+            if (mouseY > yStart) {
+              yLarger = int((mouseY - canvas.yPos - imageView.yPos)/(shrinkRatio1*shrinkRatio2));
+              ySmaller = int((yStart - canvas.yPos - imageView.yPos)/(shrinkRatio1*shrinkRatio2));
+            } else {
+              yLarger = int((yStart - canvas.yPos - imageView.yPos)/(shrinkRatio1*shrinkRatio2));
+              ySmaller = int((mouseY - canvas.yPos - imageView.yPos)/(shrinkRatio1*shrinkRatio2));
+            }
+            for (int index = 0; index < imageView.photo.pixels.length; index++) {
+              if (index%imageView.photo.width >= xSmaller && index%imageView.photo.width <= xLarger) {
+                if (index/imageView.photo.width >= ySmaller && index/imageView.photo.width <= yLarger) {
+                  imageView.photo.pixels[index] = color(255);
+                }
+              }
+            }
+            imageView.photo.updatePixels();
+            squareStarted = !squareStarted;
+          }
         }
       }
       public void isHovering() {}
@@ -231,6 +268,10 @@ void setupBrushButton() {
   brushButton = new Button("Brush", 0, mosaicButton.viewHeight*4, mainView.viewWidth/20, mainView.viewHeight/16);
   brushButton.responder = new MouseResponder() {
     public void isClicked() {
+      if (squareEnabled) {
+        squareButton.isStuck = !squareButton.isStuck;
+        squareEnabled = squareButton.isStuck;
+      }
       brushButton.isStuck = !brushButton.isStuck;
       brushEnabled = brushButton.isStuck;
       if (brushEnabled) {
@@ -257,4 +298,21 @@ void setupExitButton() {
     public void buttonDown(Mouse button) {}
   };
   mainView.addChildView(exitButton);
+}
+
+void setupSquareButton() {
+  squareButton = new Button("Square", 0, mosaicButton.viewHeight*6, mainView.viewWidth/20, mainView.viewHeight/16);
+  squareButton.responder = new MouseResponder() {
+    public void isClicked() {
+      if (brushEnabled) {
+        brushButton.isStuck = !brushButton.isStuck;
+        brushEnabled = brushButton.isStuck;
+      }
+      squareButton.isStuck = !squareButton.isStuck;
+      squareEnabled = squareButton.isStuck;
+    }
+    public void isHovering() {}
+    public void buttonDown(Mouse button) {}
+  };
+  mainView.addChildView(squareButton);
 }
