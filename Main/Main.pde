@@ -149,7 +149,7 @@ void imageSelected(File input) {
             for (int index = 0; index < imageView.photo.pixels.length; index++) {
               if (index%imageView.photo.width >= xSmaller && index%imageView.photo.width <= xLarger) {
                 if (index/imageView.photo.width >= ySmaller && index/imageView.photo.width <= yLarger) {
-                  imageView.photo.pixels[index] = color(255);
+                  imageView.photo.pixels[index] = color(combinedButton.highlightedViewColor);
                 }
               }
             }
@@ -167,7 +167,7 @@ void imageSelected(File input) {
           for (int index = 0; index < imageView.photo.pixels.length; index++) {
             if (index%imageView.photo.width >= pixelX-5 && index%imageView.photo.width <= pixelX+5) {
               if (index/imageView.photo.width >= pixelY-5 && index/imageView.photo.width <= pixelY+5) {
-                imageView.photo.pixels[index] = color(255);
+                imageView.photo.pixels[index] = color(combinedButton.highlightedViewColor);
               }
             }
           }          
@@ -263,7 +263,7 @@ void setupSaveButton() {
   saveButton.responder = new MouseResponder() {
     public void isClicked() {
       if (imageView.photo != null) {
-        selectOutput("Save file", "saveFile");
+        selectOutput("Save Image", "saveFile");
       }
     }
     public void isHovering() {}
@@ -333,48 +333,60 @@ void setupSquareButton() {
 }
 
 void setupColorButtons() {
-  redButton = new Button("Red", 8*mainView.viewWidth/20, height-mainView.viewHeight/20, mainView.viewWidth/20, mainView.viewHeight/20);
-  redButton.viewColor = color(redValue, 0, 0);
+  redButton = new Button("Red: " + redValue, 8*mainView.viewWidth/20, height-mainView.viewHeight/20, mainView.viewWidth/20, mainView.viewHeight/20);
   redButton.highlightedViewColor = color(redValue, 0, 0);
+  redButton.isStuck = true;
   redButton.responder = new MouseResponder() {
     public void isClicked() {}
     public void isHovering() {}
     public void buttonDown(Mouse button) {
       if (mouseButton == LEFT && redValue > 0) redValue--;
       if (mouseButton == RIGHT && redValue < 255) redValue++;
+      redButton.highlightedViewColor = color(redValue, 0, 0);
+      redButton.titleLabel.title = "Red: " + redValue;
+      updateCombinedButton();
     }
   };
   mainView.addChildView(redButton);
   
-  greenButton = new Button("Green", 9*mainView.viewWidth/20, height-mainView.viewHeight/20, mainView.viewWidth/20, mainView.viewHeight/20);
-  greenButton.viewColor = color(0, greenValue, 0);
+  greenButton = new Button("Green: " + greenValue, 9*mainView.viewWidth/20, height-mainView.viewHeight/20, mainView.viewWidth/20, mainView.viewHeight/20);
   greenButton.highlightedViewColor = color(0, greenValue, 0);
+  greenButton.isStuck = true;
   greenButton.responder = new MouseResponder() {
     public void isClicked() {}
     public void isHovering() {}
     public void buttonDown(Mouse button) {
       if (mouseButton == LEFT && greenValue > 0) greenValue--;
       if (mouseButton == RIGHT && greenValue < 255) greenValue++;
+      greenButton.highlightedViewColor = color(0, greenValue, 0);
+      greenButton.titleLabel.title = "Green: " + greenValue;
+      updateCombinedButton();
     }
   };
   mainView.addChildView(greenButton);
   
-  blueButton = new Button("Blue", 10*mainView.viewWidth/20, height-mainView.viewHeight/20, mainView.viewWidth/20, mainView.viewHeight/20);
-  blueButton.viewColor = color(0, 0, blueValue);
+  blueButton = new Button("Blue: " + blueValue, 10*mainView.viewWidth/20, height-mainView.viewHeight/20, mainView.viewWidth/20, mainView.viewHeight/20);
   blueButton.highlightedViewColor = color(0, 0, blueValue);
+  blueButton.isStuck = true;
   blueButton.responder = new MouseResponder() {
     public void isClicked() {}
     public void isHovering() {}
     public void buttonDown(Mouse button) {
       if (mouseButton == LEFT && blueValue > 0) blueValue--;
       if (mouseButton == RIGHT && blueValue < 255) blueValue++;
-      println(blueValue);
+      blueButton.highlightedViewColor = color(0, 0, blueValue);
+      blueButton.titleLabel.title = "Blue: " + blueValue;
+      updateCombinedButton();
     }
   };
   mainView.addChildView(blueButton);
   
   combinedButton = new Button("Color", 11*mainView.viewWidth/20, height-mainView.viewHeight/20, mainView.viewWidth/20, mainView.viewHeight/20);
-  combinedButton.highlightedViewColor = color(redValue, greenValue, blueValue);
   combinedButton.isStuck = true;
+  updateCombinedButton();
   mainView.addChildView(combinedButton);
+}
+
+void updateCombinedButton() {
+  combinedButton.highlightedViewColor = color(redValue, greenValue, blueValue);
 }

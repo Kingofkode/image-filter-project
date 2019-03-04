@@ -23,11 +23,10 @@ class Button extends View {
   
   void render() {
     super.render();
-    if (!isStuck) {
-      // Center label (glitches momentarily only works with one line of text)
-      titleLabel.yPos = viewHeight/2 + titleLabel.textHeight/3;
-      titleLabel.xPos = viewWidth/2 - titleLabel.textWidth/2;
-      
+    // Center label (glitches momentarily only works with one line of text)
+    titleLabel.yPos = viewHeight/2 + titleLabel.textHeight/3;
+    titleLabel.xPos = viewWidth/2 - titleLabel.textWidth/2;
+    if (!isStuck) {      
       if (containsMouse()) {
         highlight();
       }else{
