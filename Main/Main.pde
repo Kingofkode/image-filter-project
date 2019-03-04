@@ -2,6 +2,7 @@
 ArrayList<PImage> images = new ArrayList<PImage>();
 int currentImageIndex = 0;
 boolean brushEnabled = false;
+float shrinkRatio1, shrinkRatio2;
 // UI Components
 final View mainView = new View(0,0,0,0);
 final View canvas = new View(0,0,0,0);
@@ -77,15 +78,19 @@ void imageSelected(File input) {
     imageView = new ImageView(input.getAbsolutePath(), 0, 0, 0, 0);
     
     // Resize if necessary
-    float shrinkRatio;
     if (image.width > canvas.viewWidth) {
-      shrinkRatio = canvas.viewWidth/image.width;
-      image.resize((int)(shrinkRatio * image.width), (int)(shrinkRatio * image.height));
+      shrinkRatio1 = canvas.viewWidth/image.width;
+      image.resize((int)(shrinkRatio1 * image.width), (int)(shrinkRatio1 * image.height));
+    } else {
+      shrinkRatio1 = 1;
     }
     if (image.height > canvas.viewHeight) {
-      shrinkRatio = canvas.viewHeight/image.height;
-      image.resize((int)(shrinkRatio * image.width), (int)(shrinkRatio * image.height));
+      shrinkRatio2 = canvas.viewHeight/image.height;
+      image.resize((int)(shrinkRatio2 * image.width), (int)(shrinkRatio2 * image.height));
+    } else {
+      shrinkRatio2 = 1;
     }
+    
     imageView.viewWidth = image.width;
     imageView.viewHeight = image.height;
     // Center in canvas
@@ -105,7 +110,16 @@ void imageSelected(File input) {
       public void buttonDown(Mouse button) {
         if (brushEnabled && mousePressed) {
           imageView.photo.loadPixels();
-          imageView.photo.pixels[int(imageView.viewWidth)*(mouseY-int(imageView.yPos+canvas.yPos)-1) + mouseX-int(imageView.xPos+canvas.xPos)-1] = color(255);
+          int pixelX = int((mouseX - canvas.xPos - imageView.xPos)/(shrinkRatio1*shrinkRatio2));
+          int pixelY = int((mouseY - canvas.yPos - imageView.yPos)/(shrinkRatio1*shrinkRatio2));
+          println(pixelX, pixelY);
+          for (int index = 0; index < imageView.photo.pixels.length; index++) {
+            if (index%imageView.photo.width >= pixelX-5 && index%imageView.photo.width <= pixelX+5) {
+              if (index/imageView.photo.width >= pixelY-5 && index/imageView.photo.width <= pixelY+5) {
+                imageView.photo.pixels[index] = color(255);
+              }
+            }
+          }
           imageView.photo.updatePixels();
         }
       }
