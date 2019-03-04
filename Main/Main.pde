@@ -121,6 +121,9 @@ void imageSelected(File input) {
             yStart = mouseY;
             squareStarted = !squareStarted;
           } else {
+            images.subList(currentImageIndex, images.size()).clear();
+            images.add(imageView.photo.copy());
+            currentImageIndex++;
             imageView.photo.loadPixels();
             int xLarger, yLarger, xSmaller, ySmaller;
             if (mouseX > xStart) {
@@ -168,6 +171,11 @@ void imageSelected(File input) {
     };
   }
   cursor(ARROW);
+  brushEnabled = false;
+  brushButton.isStuck = false;
+  squareEnabled = false;
+  squareButton.isStuck = false;
+  squareStarted = false;
 }
 
 void setupFilterButtons() {
