@@ -105,21 +105,26 @@ void imageSelected(File input) {
     mainView.addChildView(openButton);
     
     imageView.responder = new MouseResponder() {
-      public void isClicked() {}
+      public void isClicked() {
+        if (brushEnabled) {
+          images.subList(currentImageIndex, images.size()).clear();
+          images.add(imageView.photo.copy());
+          currentImageIndex++;
+        }
+      }
       public void isHovering() {}
       public void buttonDown(Mouse button) {
-        if (brushEnabled && mousePressed) {
+        if (brushEnabled) {
           imageView.photo.loadPixels();
           int pixelX = int((mouseX - canvas.xPos - imageView.xPos)/(shrinkRatio1*shrinkRatio2));
           int pixelY = int((mouseY - canvas.yPos - imageView.yPos)/(shrinkRatio1*shrinkRatio2));
-          println(pixelX, pixelY);
           for (int index = 0; index < imageView.photo.pixels.length; index++) {
             if (index%imageView.photo.width >= pixelX-5 && index%imageView.photo.width <= pixelX+5) {
               if (index/imageView.photo.width >= pixelY-5 && index/imageView.photo.width <= pixelY+5) {
                 imageView.photo.pixels[index] = color(255);
               }
             }
-          }
+          }          
           imageView.photo.updatePixels();
         }
       }
@@ -133,8 +138,10 @@ void setupFilterButtons() {
   mosaicButton = new Button("Mosaic", 0, 0, mainView.viewWidth/20, mainView.viewHeight/16);
   mosaicButton.responder = new MouseResponder() {
     public void isClicked() {
+      images.subList(currentImageIndex, images.size()).clear();
+      images.add(imageView.photo.copy());
+      currentImageIndex++;
       imageView.applyFilter(MOSAIC);
-      
     }
     public void isHovering() {}
     public void buttonDown(Mouse button) {}
