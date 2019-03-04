@@ -2,6 +2,13 @@
 ArrayList<PImage> images = new ArrayList<PImage>();
 int currentImageIndex = 0;
 boolean brushEnabled = false;
+boolean squareEnabled = false;
+boolean squareStarted = false;
+int xStart, yStart;
+int redValue = 127;
+int greenValue = 127;
+int blueValue = 127;
+float shrinkRatio1, shrinkRatio2;
 // UI Components
 final View mainView = new View(0,0,0,0);
 final View canvas = new View(0,0,0,0);
@@ -13,8 +20,12 @@ Button mosaicButton, edgesButton, noiseButton;
 Button undoButton, redoButton;
 // Save button
 Button saveButton;
-// Brush button
-Button brushButton;
+// Brush and square buttons
+Button brushButton, squareButton;
+// Exit button
+Button exitButton;
+// Color selector buttons
+Button redButton, greenButton, blueButton, combinedButton;
 
 void setup () {
   fullScreen();
@@ -25,6 +36,9 @@ void setup () {
   setupUndoRedoButtons();
   setupSaveButton();
   setupBrushButton();
+  setupSquareButton();
+  setupExitButton();
+  setupColorButtons();
 }
 
 void setupMainView() {
@@ -66,38 +80,108 @@ void imageSelected(File input) {
     print("Error loading image.");
     // Display error message
   } else {
-    cursor(WAIT);
     if (imageView != null) {
       imageView.removeFromParentView();
     }
-    openButton.removeFromParentView();
+    cursor(WAIT);
     PImage image = loadImage(input.getAbsolutePath());
     imageView = new ImageView(input.getAbsolutePath(), 0, 0, 0, 0);
     
     // Resize if necessary
-    float shrinkRatio;
     if (image.width > canvas.viewWidth) {
-      shrinkRatio = canvas.viewWidth/image.width;
-      image.resize((int)(shrinkRatio * image.width), (int)(shrinkRatio * image.height));
+      shrinkRatio1 = canvas.viewWidth/image.width;
+      image.resize((int)(shrinkRatio1 * image.width), (int)(shrinkRatio1 * image.height));
+    } else {
+      shrinkRatio1 = 1;
     }
     if (image.height > canvas.viewHeight) {
-      shrinkRatio = canvas.viewHeight/image.height;
-      image.resize((int)(shrinkRatio * image.width), (int)(shrinkRatio * image.height));
+      shrinkRatio2 = canvas.viewHeight/image.height;
+      image.resize((int)(shrinkRatio2 * image.width), (int)(shrinkRatio2 * image.height));
+    } else {
+      shrinkRatio2 = 1;
     }
+    
     imageView.viewWidth = image.width;
     imageView.viewHeight = image.height;
     // Center in canvas
     imageView.xPos = (canvas.viewWidth-imageView.viewWidth)/2;
     imageView.yPos = (canvas.viewHeight-imageView.viewHeight)/2;
     canvas.addChildView(imageView);
-    
+    openButton.removeFromParentView();
     openButton.xPos = width-mainView.viewWidth/20;
     openButton.yPos = undoButton.viewHeight*3;
     openButton.viewWidth = mainView.viewWidth/20;
     openButton.viewHeight = mainView.viewHeight/16;
     mainView.addChildView(openButton);
-    cursor(ARROW);
+    
+    imageView.responder = new MouseResponder() {
+      public void isClicked() {
+        if (brushEnabled) {
+          images.subList(currentImageIndex, images.size()).clear();
+          images.add(imageView.photo.copy());
+          currentImageIndex++;
+        }
+        if (squareEnabled) {
+          if (!squareStarted) {
+            xStart = mouseX;
+            yStart = mouseY;
+            squareStarted = !squareStarted;
+          } else {
+            images.subList(currentImageIndex, images.size()).clear();
+            images.add(imageView.photo.copy());
+            currentImageIndex++;
+            imageView.photo.loadPixels();
+            int xLarger, yLarger, xSmaller, ySmaller;
+            if (mouseX > xStart) {
+              xLarger = int((mouseX - canvas.xPos - imageView.xPos)/(shrinkRatio1*shrinkRatio2));
+              xSmaller = int((xStart - canvas.xPos - imageView.xPos)/(shrinkRatio1*shrinkRatio2));
+            } else {
+              xLarger = int((xStart - canvas.xPos - imageView.xPos)/(shrinkRatio1*shrinkRatio2));
+              xSmaller = int((mouseX - canvas.xPos - imageView.xPos)/(shrinkRatio1*shrinkRatio2));
+            }
+            if (mouseY > yStart) {
+              yLarger = int((mouseY - canvas.yPos - imageView.yPos)/(shrinkRatio1*shrinkRatio2));
+              ySmaller = int((yStart - canvas.yPos - imageView.yPos)/(shrinkRatio1*shrinkRatio2));
+            } else {
+              yLarger = int((yStart - canvas.yPos - imageView.yPos)/(shrinkRatio1*shrinkRatio2));
+              ySmaller = int((mouseY - canvas.yPos - imageView.yPos)/(shrinkRatio1*shrinkRatio2));
+            }
+            for (int index = 0; index < imageView.photo.pixels.length; index++) {
+              if (index%imageView.photo.width >= xSmaller && index%imageView.photo.width <= xLarger) {
+                if (index/imageView.photo.width >= ySmaller && index/imageView.photo.width <= yLarger) {
+                  imageView.photo.pixels[index] = color(255);
+                }
+              }
+            }
+            imageView.photo.updatePixels();
+            squareStarted = !squareStarted;
+          }
+        }
+      }
+      public void isHovering() {}
+      public void buttonDown(Mouse button) {
+        if (brushEnabled) {
+          imageView.photo.loadPixels();
+          int pixelX = int((mouseX - canvas.xPos - imageView.xPos)/(shrinkRatio1*shrinkRatio2));
+          int pixelY = int((mouseY - canvas.yPos - imageView.yPos)/(shrinkRatio1*shrinkRatio2));
+          for (int index = 0; index < imageView.photo.pixels.length; index++) {
+            if (index%imageView.photo.width >= pixelX-5 && index%imageView.photo.width <= pixelX+5) {
+              if (index/imageView.photo.width >= pixelY-5 && index/imageView.photo.width <= pixelY+5) {
+                imageView.photo.pixels[index] = color(255);
+              }
+            }
+          }          
+          imageView.photo.updatePixels();
+        }
+      }
+    };
   }
+  cursor(ARROW);
+  brushEnabled = false;
+  brushButton.isStuck = false;
+  squareEnabled = false;
+  squareButton.isStuck = false;
+  squareStarted = false;
 }
 
 void setupFilterButtons() {
@@ -105,8 +189,10 @@ void setupFilterButtons() {
   mosaicButton = new Button("Mosaic", 0, 0, mainView.viewWidth/20, mainView.viewHeight/16);
   mosaicButton.responder = new MouseResponder() {
     public void isClicked() {
+      images.subList(currentImageIndex, images.size()).clear();
+      images.add(imageView.photo.copy());
+      currentImageIndex++;
       imageView.applyFilter(MOSAIC);
-      
     }
     public void isHovering() {}
     public void buttonDown(Mouse button) {}
@@ -196,11 +282,99 @@ void setupBrushButton() {
   brushButton = new Button("Brush", 0, mosaicButton.viewHeight*4, mainView.viewWidth/20, mainView.viewHeight/16);
   brushButton.responder = new MouseResponder() {
     public void isClicked() {
+      if (squareEnabled) {
+        squareButton.isStuck = !squareButton.isStuck;
+        squareEnabled = squareButton.isStuck;
+      }
       brushButton.isStuck = !brushButton.isStuck;
       brushEnabled = brushButton.isStuck;
+      if (brushEnabled) {
+        PImage brushImage = loadImage("artistic-brush.png");
+        brushImage.resize(32, 32);
+        cursor(brushImage);
+      }else{
+        cursor(ARROW);
+      }
     }
     public void isHovering() {}
     public void buttonDown(Mouse button) {}
   };
   mainView.addChildView(brushButton);
+}
+
+void setupExitButton() {
+  exitButton = new Button("Exit", width-mainView.viewWidth/20, undoButton.viewHeight*4, mainView.viewWidth/20, mainView.viewHeight/16);
+  exitButton.responder = new MouseResponder() {
+    public void isClicked() {
+      exit();
+    }
+    public void isHovering() {}
+    public void buttonDown(Mouse button) {}
+  };
+  mainView.addChildView(exitButton);
+}
+
+void setupSquareButton() {
+  squareButton = new Button("Square", 0, mosaicButton.viewHeight*6, mainView.viewWidth/20, mainView.viewHeight/16);
+  squareButton.responder = new MouseResponder() {
+    public void isClicked() {
+      if (brushEnabled) {
+        brushButton.isStuck = !brushButton.isStuck;
+        brushEnabled = brushButton.isStuck;
+        cursor(ARROW);
+      }
+      squareButton.isStuck = !squareButton.isStuck;
+      squareEnabled = squareButton.isStuck;
+    }
+    public void isHovering() {}
+    public void buttonDown(Mouse button) {}
+  };
+  mainView.addChildView(squareButton);
+}
+
+void setupColorButtons() {
+  redButton = new Button("Red", 8*mainView.viewWidth/20, height-mainView.viewHeight/20, mainView.viewWidth/20, mainView.viewHeight/20);
+  redButton.viewColor = color(redValue, 0, 0);
+  redButton.highlightedViewColor = color(redValue, 0, 0);
+  redButton.responder = new MouseResponder() {
+    public void isClicked() {}
+    public void isHovering() {}
+    public void buttonDown(Mouse button) {
+      if (mouseButton == LEFT && redValue > 0) redValue--;
+      if (mouseButton == RIGHT && redValue < 255) redValue++;
+    }
+  };
+  mainView.addChildView(redButton);
+  
+  greenButton = new Button("Green", 9*mainView.viewWidth/20, height-mainView.viewHeight/20, mainView.viewWidth/20, mainView.viewHeight/20);
+  greenButton.viewColor = color(0, greenValue, 0);
+  greenButton.highlightedViewColor = color(0, greenValue, 0);
+  greenButton.responder = new MouseResponder() {
+    public void isClicked() {}
+    public void isHovering() {}
+    public void buttonDown(Mouse button) {
+      if (mouseButton == LEFT && greenValue > 0) greenValue--;
+      if (mouseButton == RIGHT && greenValue < 255) greenValue++;
+    }
+  };
+  mainView.addChildView(greenButton);
+  
+  blueButton = new Button("Blue", 10*mainView.viewWidth/20, height-mainView.viewHeight/20, mainView.viewWidth/20, mainView.viewHeight/20);
+  blueButton.viewColor = color(0, 0, blueValue);
+  blueButton.highlightedViewColor = color(0, 0, blueValue);
+  blueButton.responder = new MouseResponder() {
+    public void isClicked() {}
+    public void isHovering() {}
+    public void buttonDown(Mouse button) {
+      if (mouseButton == LEFT && blueValue > 0) blueValue--;
+      if (mouseButton == RIGHT && blueValue < 255) blueValue++;
+      println(blueValue);
+    }
+  };
+  mainView.addChildView(blueButton);
+  
+  combinedButton = new Button("Color", 11*mainView.viewWidth/20, height-mainView.viewHeight/20, mainView.viewWidth/20, mainView.viewHeight/20);
+  combinedButton.highlightedViewColor = color(redValue, greenValue, blueValue);
+  combinedButton.isStuck = true;
+  mainView.addChildView(combinedButton);
 }
