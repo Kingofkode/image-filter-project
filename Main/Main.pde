@@ -234,6 +234,9 @@ void imageSelected(File input) {
   squareEnabled = false;
   squareButton.isStuck = false;
   squareStarted = false;
+  cropEnabled = false;
+  cropButton.isStuck = false;
+  cropStarted = false;
 }
 
 void setupFilterButtons() {
@@ -425,6 +428,7 @@ void setupSquareButton() {
       }
       squareButton.isStuck = !squareButton.isStuck;
       squareEnabled = squareButton.isStuck;
+      squareStarted = false;
     }
     public void isHovering() {}
     public void buttonDown(Mouse button) {}
@@ -506,6 +510,7 @@ void setupCropButton() {
       }
       cropButton.isStuck = !cropButton.isStuck;
       cropEnabled = cropButton.isStuck;
+      cropStarted = false;
     }
     public void isHovering() {}
     public void buttonDown(Mouse button) {}
