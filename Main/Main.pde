@@ -165,8 +165,8 @@ void imageSelected(File input) {
           int pixelX = int((mouseX - canvas.xPos - imageView.xPos)/(shrinkRatio1*shrinkRatio2));
           int pixelY = int((mouseY - canvas.yPos - imageView.yPos)/(shrinkRatio1*shrinkRatio2));
           for (int index = 0; index < imageView.photo.pixels.length; index++) {
-            if (index%imageView.photo.width >= pixelX-5 && index%imageView.photo.width <= pixelX+5) {
-              if (index/imageView.photo.width >= pixelY-5 && index/imageView.photo.width <= pixelY+5) {
+            if (index%imageView.photo.width >= pixelX-int(5/(shrinkRatio1*shrinkRatio2)) && index%imageView.photo.width <= pixelX+int(5/(shrinkRatio1*shrinkRatio2))) {
+              if (index/imageView.photo.width >= pixelY-int(5/(shrinkRatio1*shrinkRatio2)) && index/imageView.photo.width <= pixelY+int(5/(shrinkRatio1*shrinkRatio2))) {
                 imageView.photo.pixels[index] = color(combinedButton.highlightedViewColor);
               }
             }
