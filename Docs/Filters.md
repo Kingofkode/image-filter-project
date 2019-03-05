@@ -7,7 +7,7 @@ Call `applyFilter(:_)` on `ImageView` and pass in one of these constants.
 | `EDGES`       | ![](https://raw.githubusercontent.com/Kingofkode/image-filter-project/master/Screenshots/Edges%20Table.png)|
 | `NOISE`       | ![](https://raw.githubusercontent.com/Kingofkode/image-filter-project/master/Screenshots/Noise%20Table.png)|
 
-# Functionality
+## Functionality
 The code for the filters is as follows:
 
 `MOSAIC`
@@ -40,3 +40,39 @@ This does the following things.
 3. The temporary array is used to recolor the box.
 
 This process is repeated until the entire image has been converted to these boxes.
+
+`EDGES`
+When the Edges filter is called, the following code is run for every pixel that is not in the last row:
+```
+if (i < img.pixels.length - img.width) {
+  int pixelBelow = i + img.width;
+  compareRed = abs(red(img.pixels[i]) - red(img.pixels[pixelBelow]));
+  compareGreen = abs(green(img.pixels[i]) - green(img.pixels[pixelBelow]));
+  compareBlue = abs(blue(img.pixels[i]) - blue(img.pixels[pixelBelow]));
+
+  if (compareRed + compareGreen + compareBlue > sensitivity) {
+    temp[i] = color(0, 0, 0);
+  }
+}
+```
+This determines which pixel is directly beneath the current pixel and compares the RGB values for the two pixels. (This is why the last row is not considered; there are no pixels underneath.) If the total variation between the red, green, and blue values is greater than the sensitivity (set by default to 30), an "edge" is detected due to the change in color, and the pixel is set to black in a temporary array.
+The process is repeated using the pixel to the right of the current pixel, ignoring the last column:
+```
+if (i % img.width != img.width - 1) {
+  int pixelRight = i + 1;
+  compareRed = abs(red(img.pixels[i]) - red(img.pixels[pixelRight]));
+  compareGreen = abs(green(img.pixels[i]) - green(img.pixels[pixelRight]));
+  compareBlue = abs(blue(img.pixels[i]) - blue(img.pixels[pixelRight]));
+      
+  if (compareRed + compareGreen + compareBlue > sensitivity) {
+    temp[i] = color(0, 0, 0);
+  }
+}
+```
+Finally, if the pixel is not changed by either of these two processes, it is set to white to distinguish it:
+```
+if (temp[i] != color(0, 0, 0)) {
+  temp[i] = color(255, 255, 255);
+}
+```
+At the end, `temp` is used to modify the image's pixels.
