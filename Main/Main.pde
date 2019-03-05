@@ -3,7 +3,9 @@ ArrayList<PImage> images = new ArrayList<PImage>();
 int currentImageIndex = 0;
 boolean brushEnabled = false;
 boolean squareEnabled = false;
+boolean cropEnabled = false;
 boolean squareStarted = false;
+boolean cropStarted = false;
 int xStart, yStart;
 int redValue = 127;
 int greenValue = 127;
@@ -26,6 +28,8 @@ Button brushButton, squareButton;
 Button exitButton;
 // Color selector buttons
 Button redButton, greenButton, blueButton, combinedButton;
+// Crop button
+Button cropButton;
 
 void setup () {
   fullScreen();
@@ -38,6 +42,7 @@ void setup () {
   setupBrushButton();
   setupSquareButton();
   setupExitButton();
+  setupCropButton();
   setupColorButtons();
 }
 
@@ -157,6 +162,53 @@ void imageSelected(File input) {
             squareStarted = !squareStarted;
           }
         }
+        if (cropEnabled) {
+          if (!cropStarted) {
+            xStart = mouseX;
+            yStart = mouseY;
+            cropStarted = !cropStarted;
+          } else {
+            images.subList(currentImageIndex, images.size()).clear();
+            images.add(imageView.photo.copy());
+            currentImageIndex++;
+            imageView.photo.loadPixels();
+            int xLarger, yLarger, xSmaller, ySmaller;
+            if (mouseX > xStart) {
+              xLarger = int((mouseX - canvas.xPos - imageView.xPos)/(shrinkRatio1*shrinkRatio2));
+              xSmaller = int((xStart - canvas.xPos - imageView.xPos)/(shrinkRatio1*shrinkRatio2));
+            } else {
+              xLarger = int((xStart - canvas.xPos - imageView.xPos)/(shrinkRatio1*shrinkRatio2));
+              xSmaller = int((mouseX - canvas.xPos - imageView.xPos)/(shrinkRatio1*shrinkRatio2));
+            }
+            if (mouseY > yStart) {
+              yLarger = int((mouseY - canvas.yPos - imageView.yPos)/(shrinkRatio1*shrinkRatio2));
+              ySmaller = int((yStart - canvas.yPos - imageView.yPos)/(shrinkRatio1*shrinkRatio2));
+            } else {
+              yLarger = int((yStart - canvas.yPos - imageView.yPos)/(shrinkRatio1*shrinkRatio2));
+              ySmaller = int((mouseY - canvas.yPos - imageView.yPos)/(shrinkRatio1*shrinkRatio2));
+            }
+            PImage temp = imageView.photo.get(xSmaller, ySmaller, xLarger-xSmaller, yLarger-ySmaller);
+            if (temp.width > canvas.viewWidth) {
+              shrinkRatio1 = canvas.viewWidth/temp.width;
+              temp.resize((int)(shrinkRatio1 * temp.width), (int)(shrinkRatio1 * temp.height));
+            } else {
+              shrinkRatio1 = 1;
+            }
+            if (temp.height > canvas.viewHeight) {
+              shrinkRatio2 = canvas.viewHeight/temp.height;
+              temp.resize((int)(shrinkRatio2 * temp.width), (int)(shrinkRatio2 * temp.height));
+            } else {
+              shrinkRatio2 = 1;
+            }
+            imageView.photo = temp;
+            imageView.viewWidth = temp.width;
+            imageView.viewHeight = temp.height;
+            // Center in canvas
+            imageView.xPos = (canvas.viewWidth-imageView.viewWidth)/2;
+            imageView.yPos = (canvas.viewHeight-imageView.viewHeight)/2;
+            cropStarted = !cropStarted;
+          }
+        }
       }
       public void isHovering() {}
       public void buttonDown(Mouse button) {
@@ -236,6 +288,26 @@ void setupUndoRedoButtons() {
           images.add(imageView.photo.copy());
         }
         imageView.photo = images.get(currentImageIndex-1);
+
+        if (imageView.photo.width > canvas.viewWidth) {
+          shrinkRatio1 = canvas.viewWidth/imageView.photo.width;
+          imageView.photo.resize((int)(shrinkRatio1 * imageView.photo.width), (int)(shrinkRatio1 * imageView.photo.height));
+        } else {
+          shrinkRatio1 = 1;
+        }
+        if (imageView.photo.height > canvas.viewHeight) {
+          shrinkRatio2 = canvas.viewHeight/imageView.photo.height;
+          imageView.photo.resize((int)(shrinkRatio2 * imageView.photo.width), (int)(shrinkRatio2 * imageView.photo.height));
+        } else {
+          shrinkRatio2 = 1;
+        }
+        
+        imageView.viewWidth = imageView.photo.width;
+        imageView.viewHeight = imageView.photo.height;
+        // Center in canvas
+        imageView.xPos = (canvas.viewWidth-imageView.viewWidth)/2;
+        imageView.yPos = (canvas.viewHeight-imageView.viewHeight)/2;
+        
         currentImageIndex--;
       }
     }
@@ -286,6 +358,10 @@ void setupBrushButton() {
         squareButton.isStuck = !squareButton.isStuck;
         squareEnabled = squareButton.isStuck;
       }
+      if (cropEnabled) {
+        cropButton.isStuck = !cropButton.isStuck;
+        cropEnabled = cropButton.isStuck;
+      }
       brushButton.isStuck = !brushButton.isStuck;
       brushEnabled = brushButton.isStuck;
       if (brushEnabled) {
@@ -315,13 +391,17 @@ void setupExitButton() {
 }
 
 void setupSquareButton() {
-  squareButton = new Button("Square", 0, mosaicButton.viewHeight*6, mainView.viewWidth/20, mainView.viewHeight/16);
+  squareButton = new Button("Square", 0, mosaicButton.viewHeight*5, mainView.viewWidth/20, mainView.viewHeight/16);
   squareButton.responder = new MouseResponder() {
     public void isClicked() {
       if (brushEnabled) {
         brushButton.isStuck = !brushButton.isStuck;
         brushEnabled = brushButton.isStuck;
         cursor(ARROW);
+      }
+      if (cropEnabled) {
+        cropButton.isStuck = !cropButton.isStuck;
+        cropEnabled = cropButton.isStuck;
       }
       squareButton.isStuck = !squareButton.isStuck;
       squareEnabled = squareButton.isStuck;
@@ -389,4 +469,26 @@ void setupColorButtons() {
 
 void updateCombinedButton() {
   combinedButton.highlightedViewColor = color(redValue, greenValue, blueValue);
+}
+
+void setupCropButton() {
+  cropButton = new Button("Crop", 0, mosaicButton.viewHeight*6, mainView.viewWidth/20, mainView.viewHeight/16);
+  cropButton.responder = new MouseResponder() {
+    public void isClicked() {
+      if (brushEnabled) {
+        brushButton.isStuck = !brushButton.isStuck;
+        brushEnabled = brushButton.isStuck;
+        cursor(ARROW);
+      }
+      if (squareEnabled) {
+        squareButton.isStuck = !squareButton.isStuck;
+        squareEnabled = squareButton.isStuck;
+      }
+      cropButton.isStuck = !cropButton.isStuck;
+      cropEnabled = cropButton.isStuck;
+    }
+    public void isHovering() {}
+    public void buttonDown(Mouse button) {}
+  };
+  mainView.addChildView(cropButton);
 }
