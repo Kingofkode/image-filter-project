@@ -76,3 +76,17 @@ if (temp[i] != color(0, 0, 0)) {
 }
 ```
 At the end, `temp` is used to modify the image's pixels.
+
+`NOISE`
+When the Noise filter is called, the following code is run:
+```
+color white = color(255);
+for (int i = 0; i < img.pixels.length; i++) {
+  float r = random(0,2);
+  int t = round(r);
+  if (t == 0) {
+    img.pixels[i] = white;
+  }
+}
+```
+The program generates a random number for each pixel using `random`. Since this function outputs `float`, not `int`, this value must be rounded to be of use. If the rounded value is equal to 0, the pixel turns white; otherwise, it is left unchanged. The white pixels create the appearance of static.
