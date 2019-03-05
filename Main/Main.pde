@@ -321,6 +321,26 @@ void setupUndoRedoButtons() {
     public void isClicked() {
       if (currentImageIndex < images.size()-1) {
         imageView.photo = images.get(currentImageIndex+1);
+        
+        if (imageView.photo.width > canvas.viewWidth) {
+          shrinkRatio1 = canvas.viewWidth/imageView.photo.width;
+          imageView.photo.resize((int)(shrinkRatio1 * imageView.photo.width), (int)(shrinkRatio1 * imageView.photo.height));
+        } else {
+          shrinkRatio1 = 1;
+        }
+        if (imageView.photo.height > canvas.viewHeight) {
+          shrinkRatio2 = canvas.viewHeight/imageView.photo.height;
+          imageView.photo.resize((int)(shrinkRatio2 * imageView.photo.width), (int)(shrinkRatio2 * imageView.photo.height));
+        } else {
+          shrinkRatio2 = 1;
+        }
+        
+        imageView.viewWidth = imageView.photo.width;
+        imageView.viewHeight = imageView.photo.height;
+        // Center in canvas
+        imageView.xPos = (canvas.viewWidth-imageView.viewWidth)/2;
+        imageView.yPos = (canvas.viewHeight-imageView.viewHeight)/2;
+        
         currentImageIndex++;
       }
     }
