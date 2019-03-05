@@ -10,6 +10,10 @@ void interactWithTopView(Mouse interaction) {
     if (currentView.responder != null) currentInteractableView = currentView;
   }
   
+  if (interaction == Mouse.Click && currentView != dropDown) {
+    dropDown.hideOptions();
+  }  
+  
   if (currentInteractableView != null) {
     switch (interaction) {
       case Click:

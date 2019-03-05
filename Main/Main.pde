@@ -1,4 +1,4 @@
-
+ 
 final View mainView = new View(0,0,0,0); 
 DropDownView dropDown;
 
@@ -21,5 +21,10 @@ void setupDropDown() {
     public void isHovering() {}
     public void buttonDown(Mouse button) {}
   };
+  
+  for (int i = 0; i < options.length; i++) {
+    
+  }
+  
   mainView.addChildView(dropDown);
 }
