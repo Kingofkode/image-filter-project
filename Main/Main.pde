@@ -23,7 +23,23 @@ void setupDropDown() {
   };
   
   for (int i = 0; i < options.length; i++) {
+    final int index = i;
+    MouseResponder responderToAdd = new MouseResponder() {
+      public void isClicked() {
+        println("Clickkkkkkk");
+        switch (index) {
+          case 0: println("This"); break;
+          case 1: println("That"); break;
+          case 2: println("Save"); break;
+          case 3: println("Open"); break;
+        };
+        
+      }
+      public void isHovering() {}
+      public void buttonDown(Mouse button) {}
+    };
     
+    dropDown.responders.add(responderToAdd);
   }
   
   mainView.addChildView(dropDown);

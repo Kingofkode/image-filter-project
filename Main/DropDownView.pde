@@ -1,6 +1,6 @@
 class DropDownView extends Button {
   String[] options;
-  MouseResponder[] responders;
+  ArrayList<MouseResponder> responders = new ArrayList<MouseResponder>();
   boolean isExpanded = false;
   
   DropDownView(String startTitle, String[] startOptions, float startXPos, float startYPos, float startViewWidth, float startViewHeight) {
@@ -22,7 +22,7 @@ class DropDownView extends Button {
     isExpanded = true;
     for (int i = 0; i < options.length; i++) {
       Button optionBtn = new Button(options[i], 0, viewHeight*(i+1), viewWidth, viewHeight);
-      optionBtn.responder = responders[i];
+      optionBtn.responder = responders.get(i);
       addChildView(optionBtn);
     }
   }
