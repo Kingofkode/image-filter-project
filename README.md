@@ -98,7 +98,7 @@ The following example applies a mosaic filter to the aforementioned ImageView. A
 ## Tools
 In addition to the three filters, the following tools can be used to modify the images.
 ### Undo and Redo Buttons 
-
+[here](/Docs/UndoRedo.md)
 ### Save Button
 
 ### Open Button 
