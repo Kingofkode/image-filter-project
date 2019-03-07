@@ -2,9 +2,9 @@
 
 ## Table of Contents
 Click to jump to the corresponding section.
-[Installation](#installation)
-[Getting Started with the UI Library](#getting-started-with-the-ui-library)
-  [Views](#views)
+1. [Installation](#installation)
+2. [Getting Started with the UI Library](#getting-started-with-the-ui-library)
+a. [Views](#views)
 
 ## Installation
 1. Download the master branch
