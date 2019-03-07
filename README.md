@@ -6,6 +6,15 @@ Click to jump to the corresponding section.
 2. [Getting Started with the UI Library](#getting-started-with-the-ui-library)
    1. [Views](#views)
       1. [Creating a View](#creating-a-view)
+   2. [Mouse Event Handling](#mouse-event-handling)
+   3. [Button](#button)
+   4. [ImageView](#imageview)
+      1. [Applying Filters to ImageView](#applying-filters-to-imageview)
+3. [Tools](#tools)
+   1. [Undo and Redo Buttons](#undo-and-redo-buttons)
+   2. [Save Button](#save-button)
+   3. [Open Button](#open-button) 
+   4. [Brush Toggle](#brush-toggle)
 
 ## Installation
 1. Download the master branch
@@ -83,6 +92,8 @@ The following example applies a mosaic filter to the aforementioned ImageView. A
 `myImageView.applyFilter(MOSAIC);`
 
 ![](https://raw.githubusercontent.com/Kingofkode/image-filter-project/master/Screenshots/Mosaic.png)
+
+## Tools
 
 ### Undo and Redo Buttons 
 
