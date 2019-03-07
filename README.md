@@ -77,5 +77,11 @@ The following example applies a mosaic filter to the aforementioned ImageView. A
 
 ![](https://raw.githubusercontent.com/Kingofkode/image-filter-project/master/Screenshots/Mosaic.png)
 
+### Undo and Redo Buttons 
 
+### Save Button
+
+### Open Button 
+
+### Brush Toggle
 
