@@ -1,5 +1,11 @@
 # Image Filter Project
 
+## Table of Contents
+Click to jump to the corresponding section.
+[Installation](#installation)
+[Getting Started with the UI Library](#getting-started-with-the-ui-library)
+  [Views](#views)
+
 ## Installation
 1. Download the master branch
 2. Open image-filter-project-master/Main/Main.pde
