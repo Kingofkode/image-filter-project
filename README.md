@@ -15,10 +15,12 @@ Click to jump to the corresponding section.
    2. [Save Button](#save-button)
    3. [Open Button](#open-button) 
    4. [Brush Toggle](#brush-toggle)
+4. [Reflection](#reflection)
 
 ## Installation
 1. Download the master branch
 2. Open image-filter-project-master/Main/Main.pde
+
 ## Getting Started with the UI Library
 ### Views
 Views are the fundamental building blocks the user interface.
@@ -94,7 +96,7 @@ The following example applies a mosaic filter to the aforementioned ImageView. A
 ![](https://raw.githubusercontent.com/Kingofkode/image-filter-project/master/Screenshots/Mosaic.png)
 
 ## Tools
-
+In addition to the three filters, the following tools can be used to modify the images.
 ### Undo and Redo Buttons 
 
 ### Save Button
@@ -102,4 +104,6 @@ The following example applies a mosaic filter to the aforementioned ImageView. A
 ### Open Button 
 
 ### Brush Toggle
+
+## Reflection
 
