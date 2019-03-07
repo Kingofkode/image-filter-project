@@ -21,10 +21,3 @@ void mouseMoved() {
 void mousePressed() {
   interactWithTopView(Mouse.Click); // VIEW MANAGEMENT
 }
-
-void keyPressed() {
-  // Debugging Purposes only 
-  if (key == 'q') {
-    exit();
-  }
-}
