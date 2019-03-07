@@ -4,7 +4,8 @@
 Click to jump to the corresponding section.
 1. [Installation](#installation)
 2. [Getting Started with the UI Library](#getting-started-with-the-ui-library)
- 1. [Views](#views)
+   1. [Views](#views)
+      1. [Creating a View](#creating-a-view)
 
 ## Installation
 1. Download the master branch
