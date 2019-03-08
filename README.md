@@ -1,20 +1,6 @@
 # Image Filter Project
-Created by Luke Estes, Trent Pannkuk, and Isaiah Suarez <br/>
-UT OnRamps Computer Science<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
+Created by Luke Estes, Trent Pannkuk, and Isaiah Suarez  
+UT OnRamps Computer Science  
 <br/>
 
 ## Table of Contents
