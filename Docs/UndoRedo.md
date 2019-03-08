@@ -1,5 +1,5 @@
-'''// Undo Redo Buttons
-Button undoButton, redoButton;'''
+// Undo Redo Buttons
+Button undoButton, redoButton;
 
 The above code displays the initialization of both the undo and redo buttons utilizing the class developed for buttons (detailed within the section “Buttons”). 
 
