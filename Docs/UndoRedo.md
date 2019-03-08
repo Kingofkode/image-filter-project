@@ -30,7 +30,7 @@ The following line of code uses the mouse responder interface (developed within 
 
 Next, the redo button is constructed. The concept driving the functionality of this button is rather simple considering that it is essentially the opposite of the undo button. The code below is what is used to manage this particular tool. 
 ```
-redoButton = new Button("Redo", width-mainView.viewWidth/20, undoButton.viewHeight, mainView.viewWidth/20, mainView.viewHeight/16);
+  redoButton = new Button("Redo", width-mainView.viewWidth/20, undoButton.viewHeight, mainView.viewWidth/20, mainView.viewHeight/16);
   redoButton.responder = new MouseResponder() {
     public void isClicked() {
       if (currentImageIndex < images.size()-1) {
@@ -60,7 +60,7 @@ redoButton = new Button("Redo", width-mainView.viewWidth/20, undoButton.viewHeig
     }
     public void isHovering() {}
     public void buttonDown(Mouse button) {}
-  };
+
 ```
 As with the redo button the first line contains the parameters to be used within the button class. The only major difference here is that the distance of this button from the top of the screen is given as `undoButton.viewHeight`. This positions the button directly below the undo button. Following this, the responder is utilized in order to select the image from an index value which is one greater than the current index. 
 
