@@ -41,7 +41,11 @@ Click to jump to the corresponding section.
 
 ## How to Use the Program
 When the program is initially launched, the following window should appear:
-
+![](https://raw.githubusercontent.com/Kingofkode/image-filter-project/master/Screenshots/Screenshot%20(7).png)
+To begin working, open an image and select an image file from the dialogue box that appears.  
+The left toolbar contain buttons for the three filters (see [below](#filters) for more). To apply any of the filters, simply click the appropriate button. The buttons for the brush, square fill, and crop tools are also on this side. To use the brush, click the button and drag the cursor across the screen. (Note: The line may be drawn from the center of the brush, not the tip.) To use the square fill or the crop tool, click the button, then select opposite corners of the rectangular region to be edited. Do NOT click and drag; this will not be enough by itself to complete the action.  
+The right toolbar contains general program functions, including the open button once an initial image has been selected. These functions are all applied by simply clicking the respective buttons.  
+The bottom toolbar contains a color selection tool for the brush and square tools. The three boxes representing the red, green, and blue values can be tweaked by clicking on them with a mouse. Right-click them to increase the values (up to 255), and left-click to decrease the values (down to 0). The last box mixes the RGB values to preview what the tools will use.
 
 ## Getting Started with the UI Library
 ### Views
