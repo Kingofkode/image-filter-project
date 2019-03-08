@@ -6,6 +6,16 @@ UT OnRamps Computer Science<br/>
 <br/>
 <br/>
 <br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
 
 ## Table of Contents
 Click to jump to the corresponding section.
@@ -114,4 +124,5 @@ In addition to the three filters, the following tools can be used to modify the 
 [here](/Docs/Brush.md)
 ## Reflection
 During the course of this project, several major issues were encountered during the coding process. This includes:
-- To make the program look professional, we decided to make the program run at full screen. However, since different computers have different resolutions, no variables regarding position could be hard-coded; everything had to be set relative to the dimension of the screen. 
+- To make the program look professional, we decided to make the program run at full screen. However, since different computers have different resolutions, no variables regarding position could be hard-coded; everything had to be set relative to the dimension of the screen. While this was not necessarily difficult, it was tedious and made the code more complex.
+- The undo/redo functionality relies upon an `ArrayList` storing different images to keep track of the various edits that have been made. To make this work, though, we had to figure out how to manuever through the array, account for varying image sizes from the crop tool, and delete the correct images when a new filter or tool was applied to the image (otherwise, clicking 'Redo' may have advanced the program to another image when it should not have). The errors were particularly important to work out here because bugs in this code would lock up the program completely.
