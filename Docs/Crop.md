@@ -47,6 +47,5 @@ The brush button is a simple toggle button similar to the buttons seen elsewhere
             cropStarted = !cropStarted;
           }
         }
-      }
 ```
 While this may look intimidating, its operation is fairly straightforward. The first part - if `!cropStarted` is true - simply stores the coordinates of the mouse click at the first position. The second part is for the second click. First, the current image is added to `images[]` so the work can be undone if desired. After the pixels are then loaded, the series of if/else statements determines which of the two clicks produced the lower x-value and which produced the lower y-value. This allows the program to properly determine the boundaries of the rectangular region selected, and it converts these values to pixel locations in the image. After that, `temp` is used to obtain the pixels from the selected area. The final lines of code resize the image, much as is done when an image is first loaded, and the image is added to `imageView` so it can be displayed.
