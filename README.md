@@ -119,6 +119,7 @@ The following example applies a mosaic filter to the aforementioned ImageView. A
 ## Tools
 In addition to the three filters, the following tools can be used to modify the images.
 ### Undo and Redo Buttons 
+The undo button allows you to revert the changes made to the image by returning the images previously shown in the program. If so desired, the redo button allows for you to reinstate changes which were made at anytime prior to using the undo button.
 Click [here](/Docs/UndoRedo.md) to read about the undo and redo functions.
 ### Save Button
 Click [here](/Docs/Save.md) to read about how the program saves files.
