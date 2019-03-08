@@ -134,6 +134,35 @@ Click [here]
 Click [here]
 
 ## Rubric Items Met
+The following points from the rubric (as outlined by the project check-in) were met.
+- Filters (part 1)
+   - Makes use of the loadPixels() function (see line 13 in Filters.pde)
+   - Utilizes a while() loop in order to modify the pixels[] array (see lines 15-16 and 21-22; although the loops are technically for loops, they function very similarly and are more concise)
+   - Uses the color() function to reset color values within the pixels[] array (see lines 24-26)
+   - Makes use of the red(), green() and blue() functions to manipulate channel colors within the pixels[] array (see lines 30 and 33)
+   - Pushes programmatic changes back onto the screen using updatePixels() (see line 44)
+- Filters (part 2)
+   - Makes use of a temporary array in order to manipulate portions of the image (see line 49)
+   - Makes use of the loadPixels() function (see line 50)
+   - Utilizes a while() loop in order to modify the pixels[] array (see line 54)
+   - Pushes programmatic changes back onto the screen using updatePixels() (see line 87)
+   - The filter successfully demonstrates that the student is able to create a filter more advanced than simply shifting color values. (The edges filter considers other pixels in the area in order to determine whether or not to mark an edge.)
+- Documentation: See this document
+- Aesthetics: Ultimately, the visual quality of the outputs are up to the user to decide, although we believe they are quite nice.
+- Loops
+   - The author uses a while() loop within his/her code (see lines 154 and 219 of Main.pde and the examples listed above)
+   - The author utilizes multiple loops in order to achieve more dynamic effect (see aforementioned examples)
+- Syntax: This is apparent everywhere throughout our code. Every attempt was made to simplify the code as time permitted by using a custom library, and no objects are created by the program for no purpose.
+- Conditionals
+   - Program uses an if-then statement in one of the filters (see lines 55, 61, 66, and 72 in Filters.pde)
+   - Program uses an if-then or if-then-else in more than one filter (see line 97)
+- Color data type
+   - Program uses the color(), red(), green(), and blue() functions effectively  (see lines 24-26, 30, and 57-59)
+- Correct functions
+   - There are no redundant variables or code (see comments for syntax)
+   - All three of the filters work and are able to be reset  (use Undo and Redo)
+   - Author utilizes commenting throughout the code to make his/her coding decisions clearer (see code)
+<br/>
 The features detailed above meet the following points from the honors project rubric. (Note: Due to the fact that we realized certain tools were easier to implement after submitting the honors project application, some of the tools and filters may differ from what was listed initially.)
 - Basic user interface
    - The program allows for an image to be loaded from file. (Open button)
