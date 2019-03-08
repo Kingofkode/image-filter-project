@@ -1,3 +1,4 @@
+// Label inherits from View
 class Label extends View {
   String title;
   int fontSize = 12;

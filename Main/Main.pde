@@ -1,19 +1,25 @@
-//Model
+// Used by undo and redo feature
 ArrayList<PImage> images = new ArrayList<PImage>();
 int currentImageIndex = 0;
+// Used to manage buttons
 boolean brushEnabled = false;
 boolean squareEnabled = false;
 boolean cropEnabled = false;
 boolean squareStarted = false;
 boolean cropStarted = false;
+// Used by crop and rectangle feature to determine where the mouse was first pressed
 int xStart, yStart;
+// Used by color picker at the bottom of the editor
 int redValue = 127;
 int greenValue = 127;
 int blueValue = 127;
+// Used to resize the imported image if necessary
 float shrinkRatio1, shrinkRatio2;
-// UI Components
+// mainView is the window of the program
 final View mainView = new View(0,0,0,0);
+// The canvas is the place where the image is worked with
 final View canvas = new View(0,0,0,0);
+// The view that renders the image being worked with
 ImageView imageView;
 final Button openButton = new Button("Open", 0, 0, 100, 50);
 // Filter Buttons
@@ -32,6 +38,7 @@ Button redButton, greenButton, blueButton, combinedButton;
 Button cropButton;
 
 void setup () {
+  // Calls helper methods to set up the UI
   fullScreen();
   setupMainView();
   setupCanvas();
@@ -45,13 +52,14 @@ void setup () {
   setupCropButton();
   setupColorButtons();
 }
-
+// Helper Methods
 void setupMainView() {
   mainView.viewWidth = width;
   mainView.viewHeight = height;
 }
 
 void setupCanvas() {
+  // Gives the canvas some breathing room
   canvas.viewColor = 100;
   canvas.xPos = 0.05*width;
   canvas.yPos = 0.05*height;
@@ -69,7 +77,7 @@ void setupOpenButton() {
   openButton.xPos = canvas.viewWidth/2-openButton.viewWidth/2;
   openButton.yPos = canvas.viewHeight/2-openButton.viewHeight/2;
   
- 
+ // What code to execute when the open button is pressed.
   openButton.responder = new MouseResponder() {
     public void isClicked() {
       selectInput("Choose Image", "imageSelected");
@@ -83,11 +91,11 @@ void setupOpenButton() {
 void imageSelected(File input) {
   if (input == null) {
     print("Error loading image.");
-    // Display error message
   } else {
     if (imageView != null) {
       imageView.removeFromParentView();
     }
+    // Show that the image is loading
     cursor(WAIT);
     PImage image = loadImage(input.getAbsolutePath());
     imageView = new ImageView(input.getAbsolutePath(), 0, 0, 0, 0);
@@ -121,11 +129,14 @@ void imageSelected(File input) {
     
     imageView.responder = new MouseResponder() {
       public void isClicked() {
+        // Manipulate the image depending on what tool is selected
+        // Brush tool
         if (brushEnabled) {
           images.subList(currentImageIndex, images.size()).clear();
           images.add(imageView.photo.copy());
           currentImageIndex++;
         }
+        // Rectangle Tool
         if (squareEnabled) {
           if (!squareStarted) {
             xStart = mouseX;
@@ -162,6 +173,7 @@ void imageSelected(File input) {
             squareStarted = !squareStarted;
           }
         }
+        // Crop Tool
         if (cropEnabled) {
           if (!cropStarted) {
             xStart = mouseX;
@@ -228,6 +240,7 @@ void imageSelected(File input) {
       }
     };
   }
+  // Hide loading indicator
   cursor(ARROW);
   brushEnabled = false;
   brushButton.isStuck = false;
@@ -355,6 +368,7 @@ void setupUndoRedoButtons() {
 
 void setupSaveButton() {
   saveButton = new Button("Save", width-mainView.viewWidth/20, undoButton.viewHeight*2, mainView.viewWidth/20, mainView.viewHeight/16);
+  
   saveButton.responder = new MouseResponder() {
     public void isClicked() {
       if (imageView.photo != null) {
@@ -369,6 +383,7 @@ void setupSaveButton() {
 
 void saveFile(File output) {
   if (output != null) {
+    // Save photo to specified destination when "Save" button is pressed.
     imageView.photo.save(output.getAbsolutePath());
   }
 }
@@ -388,6 +403,7 @@ void setupBrushButton() {
       brushButton.isStuck = !brushButton.isStuck;
       brushEnabled = brushButton.isStuck;
       if (brushEnabled) {
+        // Change curser to brush
         PImage brushImage = loadImage("artistic-brush.png");
         brushImage.resize(32, 32);
         cursor(brushImage);
@@ -435,7 +451,7 @@ void setupSquareButton() {
   };
   mainView.addChildView(squareButton);
 }
-
+// Color picker at the bottom of the editor
 void setupColorButtons() {
   redButton = new Button("Red: " + redValue, 8*mainView.viewWidth/20, height-mainView.viewHeight/20, mainView.viewWidth/20, mainView.viewHeight/20);
   redButton.highlightedViewColor = color(redValue, 0, 0);
@@ -492,6 +508,7 @@ void setupColorButtons() {
 }
 
 void updateCombinedButton() {
+  // Preview color
   combinedButton.highlightedViewColor = color(redValue, greenValue, blueValue);
 }
 

@@ -1,3 +1,4 @@
+// Button inherits from View
 class Button extends View {
   String title;
   color highlightedTitleColor = 255;
@@ -12,13 +13,6 @@ class Button extends View {
     titleLabel.viewColor = 0;
     addChildView(titleLabel);
     borderWidth = 1;
-    //cornerRadius = 7;
-  }
-  
-  void hover() {
-    super.hover();
-    
-    
   }
   
   void render() {

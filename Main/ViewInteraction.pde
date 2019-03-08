@@ -1,7 +1,7 @@
 public enum Mouse {
   Click, Hover, LeftButton, RightButton,
 }
-
+// Used to delegate mouse events to appropriate views
 interface MouseResponder {
     public void isClicked();
     public void isHovering();

@@ -1,3 +1,5 @@
+// ImageView inherits from View
+
 class ImageView extends View {
   String photoPath;
   PImage photo;
