@@ -9,7 +9,7 @@ The above code displays the initialization of both the undo and redo buttons uti
 
 This line is then included within the void setup loop. The code here calls the void setupUndoRedoButtons loop also included within the code. 
 ```
- undoButton = new Button("Undo", width-mainView.viewWidth/20, 0, mainView.viewWidth/20, mainView.viewHeight/16);
+  undoButton = new Button("Undo", width-mainView.viewWidth/20, 0, mainView.viewWidth/20, mainView.viewHeight/16);
   undoButton.responder = new MouseResponder() {
     public void isClicked() {
       if (currentImageIndex > 0) {
