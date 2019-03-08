@@ -34,6 +34,7 @@ Click to jump to the corresponding section.
    3. [Open Button](#open-button) 
    4. [Brush Toggle](#brush-toggle)
 5. [Reflection](#reflection)
+6. [Resources](#resources)
 
 ## Installation
 1. Download the master branch
@@ -137,6 +138,12 @@ Click [here](/Docs/Open.md) to read about how the program opens files.
 Click [here](/Docs/Brush.md) to read about how the brush edits images.
 
 ## Reflection
-During the course of this project, several major issues were encountered during the coding process. This includes:
+To implement the features necessary for this project, we decided to first develop a small library to create the various features we would need, such as `View` and `Button`. This allowed the user interface to easily be made uniform, and it ensured the necessary features (such as recognizing when a mouse clicked a button) were always included. We then developed the filters in separate programs to test them on images in a streamlined environment; they were then imported into the program. The undo/redo functions were then added and checked to make sure they worked even when multiple filters were applied.  
+The tools were added once the filters were completed. The brush tool came first; when it was first implemented, the color was always set to white for simplicity. The square tool was implemented next (with the color always set to white as well); its method for determining which pixels had been selected was used for the crop tool as well. Finally, the color selector was added, and the color variable was inserted into the code for the brush and square tools.  
+During the course of this project, several major issues were encountered during the coding process. They included the following:
 - To make the program look professional, we decided to make the program run at full screen. However, since different computers have different resolutions, no variables regarding position could be hard-coded; everything had to be set relative to the dimension of the screen. While this was not necessarily difficult, it was tedious and made the code more complex.
 - The undo/redo functionality relies upon an `ArrayList` storing different images to keep track of the various edits that have been made. To make this work, though, we had to figure out how to manuever through the array, account for varying image sizes from the crop tool, and delete the correct images when a new filter or tool was applied to the image (otherwise, clicking 'Redo' may have advanced the program to another image when it should not have). The errors were particularly important to work out here because bugs in this code would lock up the program completely.
+- The brush tool required a system for relating the mouse's position on the screen to the pixels in the image, which was particularly challenging for resized images. The variables `shrinkRatio1` and `shrinkRatio2` were ultimately introduced to keep track of the effect of the rescaling. However, to check if the pixels were close to the mouse, each pixel in the entire image had to be systematically checked. This system works, but it is inefficient and can cause the brush to lag, resulting in imperfect lines. This area would be a focus of any future development projects.
+
+## Resources
+An invaluable resource during the course of this project was the Processing language reference page, located at https://processing.org/reference/.
