@@ -129,9 +129,9 @@ Click [here](/Docs/Open.md) to read about how the program opens files.
 ### Brush Toggle
 Click [here](/Docs/Brush.md) to read about how the brush edits images.
 ### Square Button
-Click [here]
+Click [here](/Docs/Square.md) to read about creating blocks of color. 
 ### Crop Button
-Click [here]
+Click [here](/Docs/Crop.md) to read about cropping the image. 
 
 ## Rubric Items Met
 The following points from the rubric (as outlined by the project check-in) were met.
