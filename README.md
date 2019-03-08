@@ -122,11 +122,16 @@ In addition to the three filters, the following tools can be used to modify the 
 The undo button allows you to revert the changes made to the image by returning the images previously shown in the program. If so desired, the redo button allows for you to reinstate changes which were made at anytime prior to using the undo button.
 Click [here](/Docs/UndoRedo.md) to read about the undo and redo functions.
 ### Save Button
+This button enables you to save a copy of the image which is currently displayed to a location on your computer. 
 Click [here](/Docs/Save.md) to read about how the program saves files.
 ### Open Button 
 Click [here](/Docs/Open.md) to read about how the program opens files.
 ### Brush Toggle
 Click [here](/Docs/Brush.md) to read about how the brush edits images.
+### Square Button
+Click [here]
+### Crop Button
+Click [here]
 
 ## Rubric Items Met
 The features detailed above meet the following points from the honors project rubric. (Note: Due to the fact that we realized certain tools were easier to implement after submitting the honors project application, some of the tools and filters may differ from what was listed initially.)
