@@ -20,23 +20,28 @@ UT OnRamps Computer Science<br/>
 ## Table of Contents
 Click to jump to the corresponding section.
 1. [Installation](#installation)
-2. [Getting Started with the UI Library](#getting-started-with-the-ui-library)
+2. [How to Use the Program](#how-to-use-the-program)
+3. [Getting Started with the UI Library](#getting-started-with-the-ui-library)
    1. [Views](#views)
       1. [Creating a View](#creating-a-view)
    2. [Mouse Event Handling](#mouse-event-handling)
    3. [Button](#button)
    4. [ImageView](#imageview)
       1. [Applying Filters to ImageView](#applying-filters-to-imageview)
-3. [Tools](#tools)
+4. [Tools](#tools)
    1. [Undo and Redo Buttons](#undo-and-redo-buttons)
    2. [Save Button](#save-button)
    3. [Open Button](#open-button) 
    4. [Brush Toggle](#brush-toggle)
-4. [Reflection](#reflection)
+5. [Reflection](#reflection)
 
 ## Installation
 1. Download the master branch
 2. Open image-filter-project-master/Main/Main.pde
+
+## How to Use the Program
+When the program is initially launched, the following window should appear:
+
 
 ## Getting Started with the UI Library
 ### Views
@@ -115,13 +120,14 @@ The following example applies a mosaic filter to the aforementioned ImageView. A
 ## Tools
 In addition to the three filters, the following tools can be used to modify the images.
 ### Undo and Redo Buttons 
-[here](/Docs/UndoRedo.md)
+Click [here](/Docs/UndoRedo.md) to read about the undo and redo functions.
 ### Save Button
-[here](/Docs/Save.md)
+Click [here](/Docs/Save.md) to read about how the program saves files.
 ### Open Button 
-[here](/Docs/Open.md)
+Click [here](/Docs/Open.md) to read about how the program opens files.
 ### Brush Toggle
-[here](/Docs/Brush.md)
+Click [here](/Docs/Brush.md) to read about how the brush edits images.
+
 ## Reflection
 During the course of this project, several major issues were encountered during the coding process. This includes:
 - To make the program look professional, we decided to make the program run at full screen. However, since different computers have different resolutions, no variables regarding position could be hard-coded; everything had to be set relative to the dimension of the screen. While this was not necessarily difficult, it was tedious and made the code more complex.
