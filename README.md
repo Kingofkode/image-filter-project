@@ -125,12 +125,16 @@ Click [here](/Docs/UndoRedo.md) to read about the undo and redo functions.
 This button enables you to save a copy of the image which is currently displayed to a location on your computer. 
 Click [here](/Docs/Save.md) to read about how the program saves files.
 ### Open Button 
+The open button is used to upload images onto the canvas so that they may be edited. 
 Click [here](/Docs/Open.md) to read about how the program opens files.
-### Brush Toggle
+### Brush Toggle and Colors
+The button labeled "Brush" when toggled creates a paint brush which moves with your cursor. By pressing down and dragging a line will be drawn. Additionally, the color selected may be changed by utilizing the color selector at the bottom of the canvas.    
 Click [here](/Docs/Brush.md) to read about how the brush edits images.
 ### Square Button
+This function allows you to click at two points which will become opposite corners of a rectangle created with the color which is selected at that time.  
 Click [here](/Docs/Square.md) to read about creating blocks of color. 
 ### Crop Button
+This button allows you to select any two points on the image. These two points will become the opposite corners of a rectangle. All of the area of the photo outside of that rectangle will be removed, thus only saving the area which is contained. 
 Click [here](/Docs/Crop.md) to read about cropping the image. 
 
 ## Rubric Items Met
