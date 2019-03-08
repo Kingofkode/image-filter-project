@@ -162,7 +162,7 @@ The following points from the rubric (as outlined by the project check-in) were 
    - There are no redundant variables or code (see comments for syntax)
    - All three of the filters work and are able to be reset  (use Undo and Redo)
    - Author utilizes commenting throughout the code to make his/her coding decisions clearer (see code)
-<br/>
+
 The features detailed above meet the following points from the honors project rubric. (Note: Due to the fact that we realized certain tools were easier to implement after submitting the honors project application, some of the tools and filters may differ from what was listed initially.)
 - Basic user interface
    - The program allows for an image to be loaded from file. (Open button)
