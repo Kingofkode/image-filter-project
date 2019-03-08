@@ -107,11 +107,11 @@ In addition to the three filters, the following tools can be used to modify the 
 ### Undo and Redo Buttons 
 [here](/Docs/UndoRedo.md)
 ### Save Button
-
+[here](/Docs/Save.md)
 ### Open Button 
-
+[here](/Docs/Open.md)
 ### Brush Toggle
-
+[here](/Docs/Brush.md)
 ## Reflection
 During the course of this project, several major issues were encountered during the coding process. This includes:
 - To make the program look professional, we decided to make the program run at full screen. However, since different computers have different resolutions, no variables regarding position could be hard-coded; everything had to be set relative to the dimension of the screen. 
