@@ -19,6 +19,7 @@ Click to jump to the corresponding section.
    2. [Save Button](#save-button)
    3. [Open Button](#open-button) 
    4. [Brush Toggle](#brush-toggle)
+5. [Rubric Items Met](#rubric-items-met)
 5. [Reflection](#reflection)
 6. [Resources](#resources)
 
@@ -118,7 +119,6 @@ The following example applies a mosaic filter to the aforementioned ImageView. A
 ## Tools
 In addition to the three filters, the following tools can be used to modify the images.
 ### Undo and Redo Buttons 
-The undo button allows you to revert the changes made to the image by returning the images previously shown in the program. If so desired, the redo button allows for you to reinstate changes which were made at anytime prior to using the undo button. 
 Click [here](/Docs/UndoRedo.md) to read about the undo and redo functions.
 ### Save Button
 Click [here](/Docs/Save.md) to read about how the program saves files.
@@ -126,6 +126,27 @@ Click [here](/Docs/Save.md) to read about how the program saves files.
 Click [here](/Docs/Open.md) to read about how the program opens files.
 ### Brush Toggle
 Click [here](/Docs/Brush.md) to read about how the brush edits images.
+
+## Rubric Items Met
+The features detailed above meet the following points from the honors project rubric. (Note: Due to the fact that we realized certain tools were easier to implement after submitting the honors project application, some of the tools and filters may differ from what was listed initially.)
+- Basic user interface
+   - The program allows for an image to be loaded from file. (Open button)
+   - The program allows for an image to be saved to file. (Save button)
+   - There is a dynamic canvas that adjusts in size to the image being loaded. (ImageView changes size to correspond to the resolution and aspect ratio of the loaded image, even during crops.)
+   - There are togglable buttons for tools and filters. (The tool buttons are all togglable. Because some of the filters can be applied multiple times to achieve different effects, and because the order in which the filters are applied makes a difference, the filter buttons were not made togglable.)
+- Advanced user interface
+   - There is an action history built in that allows at least one undo command. (Undo/redo buttons)
+- Image manipulating tools
+   - Brush (Brush tool)
+   - Crop (Crop tool)
+   - Color selection (at bottom of screen)
+   - Draw basic shapes (Square tool)
+- Advanced filters
+   - Mosaic
+   - Edges
+   - Noise (all inspired by ideas in the honors project introduction)
+- Program documentation: See this document
+   
 
 ## Reflection
 To implement the features necessary for this project, we decided to first develop a small library to create the various features we would need, such as `View` and `Button`. This allowed the user interface to easily be made uniform, and it ensured the necessary features (such as recognizing when a mouse clicked a button) were always included. We then developed the filters in separate programs to test them on images in a streamlined environment; they were then imported into the program. The undo/redo functions were then added and checked to make sure they worked even when multiple filters were applied.  
